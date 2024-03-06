@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Header.module.css";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -31,9 +32,9 @@ export function Header() {
             </a>
           </li>
           <li className={styles.menu__item}>
-            <a href="../signin.html" className={styles.menu__link}>
+            <Link href="/pages/SignUpPage" className={styles.menu__link}>
               Войти
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
