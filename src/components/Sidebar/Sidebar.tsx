@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
+import Link from "next/link";
 
 export function Sidebar() {
   return (
@@ -15,7 +16,10 @@ export function Sidebar() {
       <div className={styles.sidebar__block}>
         <div className={styles.sidebar__list}>
           <div className={styles.sidebar__item}>
-            <a className={styles.sidebar__link} href="#">
+            <Link
+              className={styles.sidebar__link}
+              href="/pages/PlaylistOfTheDayPage"
+            >
               <Image
                 className={styles.sidebar__img}
                 src="/image/playlist01.png"
@@ -23,10 +27,10 @@ export function Sidebar() {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
           <div className={styles.sidebar__item}>
-            <a className={styles.sidebar__link} href="#">
+            <Link className={styles.sidebar__link} href="/pages/OneHundredDanceHitsPage">
               <Image
                 className={styles.sidebar__img}
                 src="/image/playlist02.png"
@@ -34,10 +38,10 @@ export function Sidebar() {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
           <div className={styles.sidebar__item}>
-            <a className={styles.sidebar__link} href="#">
+            <Link className={styles.sidebar__link} href="/pages/IndieChargePage">
               <Image
                 className={styles.sidebar__img}
                 src="/image/playlist03.png"
@@ -45,7 +49,7 @@ export function Sidebar() {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

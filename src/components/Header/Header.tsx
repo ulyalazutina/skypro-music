@@ -22,17 +22,17 @@ export function Header() {
       <div className={styles.nav__menu}>
         <ul className={styles.menu__list}>
           <li className={styles.menu__item}>
-            <a href="#" className={styles.menu__link}>
+            <Link href="/" className={styles.menu__link}>
               Главное
-            </a>
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a href="#" className={styles.menu__link}>
+            <Link href="/pages/MyTracksPage" className={styles.menu__link}>
               Мой плейлист
-            </a>
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <Link href="/pages/SignUpPage" className={styles.menu__link}>
+            <Link href="/pages/SignInPage" className={styles.menu__link}>
               Войти
             </Link>
           </li>
