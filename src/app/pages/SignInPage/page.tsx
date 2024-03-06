@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./SignInPage.module.css";
 import classNames from "classnames";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
@@ -13,8 +14,8 @@ export default function SignInPage() {
                 <Image
                   src="/image/logo_modal.png"
                   alt="logo"
-                  width={200}
-                  height={200}
+                  width={140}
+                  height={21}
                 />
               </div>
             </a>
@@ -31,10 +32,10 @@ export default function SignInPage() {
               placeholder="Пароль"
             />
             <button className={styles.modal__btn_enter}>
-              <a href="../index.html">Войти</a>
+              <Link href="/">Войти</Link>
             </button>
             <button className={styles.modal__btn_signup}>
-              <a href="signup.html">Зарегистрироваться</a>
+              <Link href="/pages/SignUpPage">Зарегистрироваться</Link>
             </button>
           </form>
         </div>
