@@ -3,18 +3,18 @@ import styles from "./Column.module.css";
 
 export function Column() {
     return (
-        <div className={styles.content__title}>
-        <div className={classNames(styles.playlist_title__col, styles.col01)}>
+        <div className={styles.contentTitle}>
+        <div className={classNames(styles.playlistTitleCol, styles.col01)}>
           Трек
         </div>
-        <div className={classNames(styles.playlist_title__col, styles.col02)}>
+        <div className={classNames(styles.playlistTitleCol, styles.col02)}>
           Исполнитель
         </div>
-        <div className={classNames(styles.playlist_title__col, styles.col03)}>
+        <div className={classNames(styles.playlistTitleCol, styles.col03)}>
           Альбом
         </div>
-        <div className={classNames(styles.playlist_title__col, styles.col04)}>
-          <svg className={styles.playlist_title__svg}>
+        <div className={classNames(styles.playlistTitleCol, styles.col04)}>
+          <svg className={styles.playlistTitleSvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-watch" />
           </svg>
         </div>

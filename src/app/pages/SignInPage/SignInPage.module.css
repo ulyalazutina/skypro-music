@@ -4,7 +4,7 @@
     overflow: hidden;
 }
 
-.container_enter {
+.containerEnter {
     max-width: 100%;
     height: 100vh;
     margin: 0 auto;
@@ -12,23 +12,23 @@
     background-color: rgba(0, 0, 0, 0.85);
 }
 
-.modal__btn_enter:hover {
+.modalBtnEnter:hover {
     background-color: #3f007d;
 }
 
-.modal__btn_signup:hover {
+.modalBtnSignup:hover {
     background-color: #f4f5f6;
 }
 
-.modal__btn_enter:active {
+.modalBtnEnter:active {
     background-color: #271a58;
 }
 
-.modal__btn_signup:active {
+.modalBtnSignup:active {
     background-color: #d9d9d9;
 }
 
-.modal__block {
+.modalBlock {
     position: absolute;
     z-index: 2;
     left: calc(50% - (366px / 2));
@@ -36,7 +36,7 @@
     opacity: 1;
 }
 
-.modal__form_login {
+.modalFormLogin {
     width: 366px;
     height: 439px;
     background-color: #ffffff;
@@ -55,23 +55,23 @@
 
 }
 
-.modal__form_login input:first-child {
+.modalFormLogin input:first-child {
     margin-bottom: 30px;
 }
 
-.modal__logo {
+.modalLogo {
     width: 140px;
     height: 21px;
     margin-bottom: 34px;
     background-color: transparent;
 }
 
-.modal__logo img {
+.modalLogo img {
     width: 140px;
     height: auto;
 }
 
-.modal__input {
+.modalInput {
     width: 100%;
     border-top: none;
     border-left: none;
@@ -82,7 +82,7 @@
 
 }
 
-.modal__input::-webkit-input-placeholder {
+.modalInput::-webkit-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -93,7 +93,7 @@
 
 }
 
-.modal__input:-ms-input-placeholder {
+.modalInput:-ms-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -104,7 +104,7 @@
 
 }
 
-.modal__input::-ms-input-placeholder {
+.modalInput::-ms-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -115,7 +115,7 @@
 
 }
 
-.modal__input::placeholder {
+.modalInput::placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -126,7 +126,7 @@
 
 }
 
-.modal__btn_enter {
+.modalBtnEnter {
     width: 278px;
     height: 52px;
     background-color: #580ea2;
@@ -147,7 +147,7 @@
 
 }
 
-.modal__btn_enter a {
+.modalBtnEnter a {
     width: 100%;
     height: 100%;
     font-style: normal;
@@ -169,7 +169,7 @@
 
 }
 
-.modal__btn_signup {
+.modalBtnSignup {
     width: 278px;
     height: 52px;
     background-color: transparent;
@@ -194,7 +194,7 @@
 
 }
 
-.modal__btn_signup a {
+.modalBtnSignup a {
     width: 100%;
     height: 100%;
     font-style: normal;

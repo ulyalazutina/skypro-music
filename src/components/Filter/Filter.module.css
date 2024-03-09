@@ -1,4 +1,4 @@
-.centerblock__filter {
+.centerblockFilter {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -12,7 +12,7 @@
     margin-bottom: 51px;
 }
 
-.filter__title {
+.filterTitle {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -20,7 +20,7 @@
     margin-right: 15px;
 }
 
-.filter__button {
+.filterButton {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -30,17 +30,17 @@
     padding: 6px 20px;
 }
 
-.filter__button:not(:last-child) {
+.filterButton:not(:last-child) {
     margin-right: 10px;
 }
 
-.btn_text:hover {
+.btnText:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
     cursor: pointer;
 }
 
-.btn_text:active {
+.btnText:active {
     border-color: #ad61ff;
     color: #ad61ff;
     cursor: pointer;

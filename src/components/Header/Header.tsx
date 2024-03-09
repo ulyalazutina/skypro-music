@@ -4,35 +4,35 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <nav className={styles.main__nav}>
-      <div className={styles.nav__logo}>
+    <nav className={styles.mainNav}>
+      <div className={styles.navLogo}>
         <Image
-          className={styles.logo__image}
+          className={styles.logoImage}
           src="/image/logo.png"
           alt="Logo"
           width={113.33}
           height={17}
         />
       </div>
-      <div className={styles.nav__burger}>
-        <span className={styles.burger__line} />
-        <span className={styles.burger__line} />
-        <span className={styles.burger__line} />
+      <div className={styles.navBurger}>
+        <span className={styles.burgerLine} />
+        <span className={styles.burgerLine} />
+        <span className={styles.burgerLine} />
       </div>
-      <div className={styles.nav__menu}>
-        <ul className={styles.menu__list}>
-          <li className={styles.menu__item}>
-            <Link href="/" className={styles.menu__link}>
+      <div className={styles.navMenu}>
+        <ul className={styles.menuList}>
+          <li className={styles.menuItem}>
+            <Link href="/" className={styles.menuLink}>
               Главное
             </Link>
           </li>
-          <li className={styles.menu__item}>
-            <Link href="/pages/MyTracksPage" className={styles.menu__link}>
+          <li className={styles.menuItem}>
+            <Link href="/pages/MyTracksPage" className={styles.menuLink}>
               Мой плейлист
             </Link>
           </li>
-          <li className={styles.menu__item}>
-            <Link href="/pages/SignInPage" className={styles.menu__link}>
+          <li className={styles.menuItem}>
+            <Link href="/pages/SignInPage" className={styles.menuLink}>
               Войти
             </Link>
           </li>

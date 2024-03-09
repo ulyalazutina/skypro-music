@@ -27,7 +27,7 @@
     justify-content: space-between;
 }
 
-.main__centerblock {
+.mainCenterblock {
     width: auto;
     -webkit-box-flex: 3;
     -ms-flex-positive: 3;
@@ -37,7 +37,7 @@
 
 
 
-.centerblock__h2 {
+.centerblockTitle {
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
@@ -47,8 +47,7 @@
 }
 
 
-
-.centerblock__content {
+.centerblockContent {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -60,7 +59,7 @@
 
 
 
-.content__playlist {
+.contentPlaylist {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

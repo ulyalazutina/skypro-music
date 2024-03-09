@@ -1,4 +1,4 @@
-.bar__player {
+.barPlayer {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -14,7 +14,7 @@
     justify-content: flex-start;
 }
 
-.player__controls {
+.playerControls {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -25,7 +25,7 @@
     padding: 0 27px 0 31px;
 }
 
-.player__track_play {
+.playerTrackPlay {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -35,11 +35,11 @@
     flex-direction: row;
 }
 
-.player__btn_prev,
-.player__btn_play,
-.player__btn_next,
-.player__btn_repeat,
-.player__btn_shuffle {
+.playerBtnPrev,
+.playerBtnPlay,
+.playerBtnNext,
+.playerBtnRepeat,
+.playerBtnShuffle {
     padding: 5px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -49,20 +49,20 @@
     align-items: center;
 }
 
-.player__btn_prev {
+.playerBtnPrev {
     margin-right: 23px;
 }
 
-.player__btn_prev_svg {
+.playerBtPrevSvg {
     width: 15px;
     height: 14px;
 }
 
-.player__btn_play {
+.playerBtnPlay {
     margin-right: 23px;
 }
 
-.player__btn_play_svg {
+.playerBtnPlaySvg {
     width: 22px;
     height: 20px;
     fill: #d9d9d9;
@@ -72,30 +72,30 @@
     cursor: pointer;
 }
 
-.player__btn_next {
+.playerBtnNext {
     margin-right: 28px;
     fill: #a53939;
 }
 
-.player__btn_next_svg {
+.playerBtnNextSvg {
     width: 15px;
     height: 14px;
     fill: inherit;
     stroke: #d9d9d9;
 }
 
-.player__btn_repeat {
+.playerBtnRepeat {
     margin-right: 24px;
 }
 
-.player__btn_repeat_svg {
+.playerBtnRepeatSvg {
     width: 18px;
     height: 12px;
     fill: transparent;
     stroke: #696969;
 }
 
-.player__btn_shuffle {
+.playerBtnShuffle {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -104,33 +104,33 @@
     align-items: center;
 }
 
-.player__btn_shuffle_svg {
+.playerBtnShuffleSvg {
     width: 19px;
     height: 12px;
     fill: transparent;
     stroke: #696969;
 }
 
-._btn_icon:hover svg {
+._btnIcon:hover svg {
     fill: transparent;
     stroke: #acacac;
     cursor: pointer;
 }
 
-._btn_icon:active svg {
+._btnIcon:active svg {
     fill: transparent;
     stroke: #ffffff;
     cursor: pointer;
 }
 
-._btn_icon:active .track_play__like_svg,
-._btn_icon:active .track_play__dislike_svg {
+._btnIcon:active .trackPlayLikeSvg,
+._btnIcon:active .trackPlayDislikeSvg {
     fill: #696969;
     stroke: #ffffff;
     cursor: pointer;
 }
 
-.track_play__contain {
+.trackPlayContain {
     width: auto;
     display: -ms-grid;
     display: grid;
@@ -142,7 +142,7 @@
     align-items: center;
 }
 
-.track_play__like_dis {
+.trackPlayLikeDis {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -156,7 +156,7 @@
     margin-left: 26%;
 }
 
-.track_play__image {
+.trackPlayImage {
     width: 51px;
     height: 51px;
     background-color: #313131;
@@ -176,21 +176,21 @@
     grid-area: image;
 }
 
-.track_play__svg {
+.trackPlaySvg {
     width: 18px;
     height: 17px;
     fill: transparent;
     stroke: #4e4e4e;
 }
 
-.track_play__author {
+.trackPlayAuthor {
     grid-row: 1;
     grid-column: 2;
     grid-area: author;
     min-width: 49px;
 }
 
-.track_play__author_link {
+.trackPlayAuthorLink {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -199,14 +199,14 @@
     white-space: nowrap;
 }
 
-.track_play__album {
+.trackPlayAlbum {
     grid-row: 2;
     grid-column: 2;
     grid-area: album;
     min-width: 49px;
 }
 
-.track_play__album_link {
+.trackPlayAlbumLink {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -214,30 +214,30 @@
     color: #ffffff;
 }
 
-.track-play__like_svg {
+.trackPlayLikeSvg {
     width: 14px;
     height: 12px;
     fill: transparent;
     stroke: #696969;
 }
 
-.track_play__like,
-.track_play__dislike {
+.trackPlayLike,
+.trackPlayDislike {
     padding: 5px;
 }
 
-.track_play__dislike_svg {
+.trackPlayDislikeSvg {
     width: 14.34px;
     height: 13px;
     fill: transparent;
     stroke: #696969;
 }
 
-.track_play__dislike {
+.trackPlayDislike {
     margin-left: 28.5px;
 }
 
-.track_play__like_svg {
+.trackPlayLikeSvg {
     width: 14px;
     height: 12px;
     fill: transparent;

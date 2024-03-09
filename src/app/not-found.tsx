@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <div className={styles.not_found_block}>
+        <div className={styles.notFoundBlock}>
           <h1 className={styles.title}>404</h1>
           <div className={styles.subtitle}>
             Страница не найдена{" "}

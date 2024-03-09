@@ -1,11 +1,11 @@
-import { Bar } from "../components/Bar/Bar";
-import { Column } from "../components/Column/Column";
-import { Filter } from "../components/Filter/Filter";
-import { Header } from "../components/Header/Header";
-import { Search } from "../components/Search/Search";
-import { Sidebar } from "../components/Sidebar/Sidebar";
-import { Song } from "../components/Song/Song";
+import { Header } from "@components/Header/Header";
 import styles from "./page.module.css";
+import { Search } from "@components/Search/Search";
+import { Filter } from "@components/Filter/Filter";
+import { Column } from "@components/Column/Column";
+import { Song } from "@components/Song/Song";
+import { Sidebar } from "@components/Sidebar/Sidebar";
+import { Bar } from "@components/Bar/Bar";
 
 export default function Home() {
   return (
@@ -13,13 +13,13 @@ export default function Home() {
       <div className={styles.container}>
         <main className={styles.main}>
           <Header />
-          <div className={styles.main__centerblock}>
+          <div className={styles.mainCenterblock}>
             <Search />
-            <h2 className={styles.centerblock__h2}>Треки</h2>
+            <h2 className={styles.centerblockTitle}>Треки</h2>
             <Filter />
-            <div className={styles.centerblock__content}>
+            <div className={styles.centerblockContent}>
               <Column />
-              <div className={styles.content__playlist}>
+              <div className={styles.contentPlaylist}>
                 <Song />
               </div>
             </div>

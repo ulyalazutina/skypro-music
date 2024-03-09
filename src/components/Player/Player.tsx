@@ -3,68 +3,68 @@ import styles from "./Player.module.css";
 
 export function Player() {
   return (
-    <div className={styles.bar__player}>
-      <div className={styles.player__controls}>
-        <div className={styles.player__btn_prev}>
-          <svg className={styles.player__btn_prev_svg}>
+    <div className={styles.barPlayer}>
+      <div className={styles.playerControls}>
+        <div className={styles.playerBtnPrev}>
+          <svg className={styles.playerBtPrevSvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-prev" />
           </svg>
         </div>
-        <div className={classNames(styles.player__btn_play, styles._btn)}>
-          <svg className={styles.player__btn_play_svg}>
+        <div className={classNames(styles.playerBtnPlay, styles._btn)}>
+          <svg className={styles.playerBtnPlaySvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-play" />
           </svg>
         </div>
-        <div className={styles.player__btn_next}>
-          <svg className={styles.player__btn_next_svg}>
+        <div className={styles.playerBtnNext}>
+          <svg className={styles.playerBtnNextSvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-next" />
           </svg>
         </div>
         <div
-          className={classNames(styles.player__btn_repeat, styles._btn_icon)}
+          className={classNames(styles.playerBtnRepeat, styles._btnIcon)}
         >
-          <svg className={styles.player__btn_repeat_svg}>
+          <svg className={styles.playerBtnRepeatSvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-repeat" />
           </svg>
         </div>
         <div
-          className={classNames(styles.player__btn_shuffle, styles._btn_icon)}
+          className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
         >
-          <svg className={styles.player__btn_shuffle_svg}>
+          <svg className={styles.playerBtnShuffleSvg}>
             <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
           </svg>
         </div>
       </div>
-      <div className={styles.player__track_play}>
-        <div className={styles.track_play__contain}>
-          <div className={styles.track_play__image}>
-            <svg className={styles.track_play__svg}>
+      <div className={styles.playerTrackPlay}>
+        <div className={styles.trackPlayContain}>
+          <div className={styles.trackPlayImage}>
+            <svg className={styles.trackPlaySvg}>
               <use xlinkHref="/image/icon/sprite.svg#icon-note" />
             </svg>
           </div>
-          <div className={styles.track_play__author}>
-            <a className={styles.track_play__author_link} href="http://">
+          <div className={styles.trackPlayAuthor}>
+            <a className={styles.trackPlayAuthorLink} href="http://">
               Ты та...
             </a>
           </div>
-          <div className={styles.track_play__album}>
-            <a className={styles.track_play__album_link} href="http://">
+          <div className={styles.trackPlayAlbum}>
+            <a className={styles.trackPlayAlbumLink} href="http://">
               Баста
             </a>
           </div>
         </div>
-        <div className={styles.track_play__like_dis}>
+        <div className={styles.trackPlayLikeDis}>
           <div
-            className={classNames(styles.track_play__like, styles._btn_icon)}
+            className={classNames(styles.trackPlayLike, styles._btnIcon)}
           >
-            <svg className={styles.track_play__like_svg}>
+            <svg className={styles.trackPlayLikeSvg}>
               <use xlinkHref="/image/icon/sprite.svg#icon-like" />
             </svg>
           </div>
           <div
-            className={classNames(styles.track_play__dislike, styles._btn_icon)}
+            className={classNames(styles.trackPlayDislike, styles._btnIcon)}
           >
-            <svg className={styles.track_play__dislike_svg}>
+            <svg className={styles.trackPlayDislikeSvg}>
               <use xlinkHref="/image/icon/sprite.svg#icon-dislike" />
             </svg>
           </div>

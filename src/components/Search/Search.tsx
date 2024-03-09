@@ -2,12 +2,12 @@ import styles from "./Search.module.css";
 
 export function Search() {
   return (
-    <div className={styles.centerblock__search}>
-      <svg className={styles.search__svg}>
+    <div className={styles.centerblockSearch}>
+      <svg className={styles.searchSvg}>
         <use xlinkHref="/image/icon/sprite.svg#icon-search" />
       </svg>
       <input
-        className={styles.search__text}
+        className={styles.searchText}
         type="search"
         placeholder="Поиск"
         name="search"

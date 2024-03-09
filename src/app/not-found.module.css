@@ -13,7 +13,7 @@
     background-color: #181818;
 }
 
-.not_found_block {
+.notFoundBlock {
     position: absolute;
     z-index: 2;
     left: calc(50% - 250px);

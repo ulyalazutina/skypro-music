@@ -4,24 +4,24 @@ import Link from "next/link";
 
 export function Sidebar() {
   return (
-    <div className={styles.main__sidebar}>
-      <div className={styles.sidebar__personal}>
-        <p className={styles.sidebar__personal_name}>Sergey.Ivanov</p>
-        <div className={styles.sidebar__icon}>
+    <div className={styles.mainSidebar}>
+      <div className={styles.sidebarPersonal}>
+        <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
+        <div className={styles.sidebarIcon}>
           <svg>
             <use xlinkHref="/image/icon/sprite.svg#logout" />
           </svg>
         </div>
       </div>
-      <div className={styles.sidebar__block}>
-        <div className={styles.sidebar__list}>
-          <div className={styles.sidebar__item}>
+      <div className={styles.sidebarBlock}>
+        <div className={styles.sidebarList}>
+          <div className={styles.sidebarItem}>
             <Link
-              className={styles.sidebar__link}
+              className={styles.sidebarLink}
               href="/pages/PlaylistOfTheDayPage"
             >
               <Image
-                className={styles.sidebar__img}
+                className={styles.sidebarImg}
                 src="/image/playlist01.png"
                 alt="day's playlist"
                 width={250}
@@ -29,10 +29,10 @@ export function Sidebar() {
               />
             </Link>
           </div>
-          <div className={styles.sidebar__item}>
-            <Link className={styles.sidebar__link} href="/pages/OneHundredDanceHitsPage">
+          <div className={styles.sidebarItem}>
+            <Link className={styles.sidebarLink} href="/pages/OneHundredDanceHitsPage">
               <Image
-                className={styles.sidebar__img}
+                className={styles.sidebarImg}
                 src="/image/playlist02.png"
                 alt="day's playlist"
                 width={250}
@@ -40,10 +40,10 @@ export function Sidebar() {
               />
             </Link>
           </div>
-          <div className={styles.sidebar__item}>
-            <Link className={styles.sidebar__link} href="/pages/IndieChargePage">
+          <div className={styles.sidebarItem}>
+            <Link className={styles.sidebarLink} href="/pages/IndieChargePage">
               <Image
-                className={styles.sidebar__img}
+                className={styles.sidebarImg}
                 src="/image/playlist03.png"
                 alt="day's playlist"
                 width={250}
