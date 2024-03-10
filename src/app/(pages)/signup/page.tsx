@@ -1,4 +1,4 @@
-import styles from "./SignUpPage.module.css";
+import styles from "./signup.module.css";
 import Link from "next/link";
 import { FormWrapper } from "@components/FormWrapper/FormWrapper";
 
@@ -9,7 +9,7 @@ export default function SignUpPage() {
       <input className={styles.modalInput} type="password" name="password" placeholder="Пароль" />
       <input className={styles.modalInput} type="password" name="password" placeholder="Повторите пароль" />
       <button className={styles.modalBtnSignupEnt}>
-        <Link href="/pages/SignInPage">Зарегистрироваться</Link>
+        <Link href="/signin">Зарегистрироваться</Link>
       </button>
     </FormWrapper>
   );

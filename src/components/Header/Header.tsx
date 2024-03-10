@@ -6,13 +6,7 @@ export function Header() {
   return (
     <nav className={styles.mainNav}>
       <div className={styles.navLogo}>
-        <Image
-          className={styles.logoImage}
-          src="/image/logo.png"
-          alt="Logo"
-          width={113.33}
-          height={17}
-        />
+        <Image className={styles.logoImage} src="/image/logo.png" alt="Logo" width={113.33} height={17} />
       </div>
       <div className={styles.navBurger}>
         <span className={styles.burgerLine} />
@@ -27,12 +21,12 @@ export function Header() {
             </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link href="/pages/MyTracksPage" className={styles.menuLink}>
+            <Link href="/MyTracksPage" className={styles.menuLink}>
               Мой плейлист
             </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link href="/pages/SignInPage" className={styles.menuLink}>
+            <Link href="/signin" className={styles.menuLink}>
               Войти
             </Link>
           </li>
