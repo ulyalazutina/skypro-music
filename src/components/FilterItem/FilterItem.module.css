@@ -42,7 +42,8 @@
     gap: 28px;
     overflow-y: auto;
     max-height: 237px;
-    padding-right: 24px;
+    min-width: 100px;
+    padding-right: 30px;
 }
 
 .items::-webkit-scrollbar {
