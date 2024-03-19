@@ -3,7 +3,15 @@ import styles from "./Playlist.module.css";
 import { getTracks } from "@api/tracks";
 
 export default async function Playlist() {
-  const playlistArray: Array<trackType> = await getTracks();
+  let playlistArray: trackType[];
+
+  try {
+    playlistArray = await getTracks();
+  } catch (error) {
+    console.error("Произошла ошибка при получении списка треков:", error);
+
+    playlistArray = [];
+  }
   return (
     <div className={styles.contentPlaylist}>
       {playlistArray.map((item, index) => {
