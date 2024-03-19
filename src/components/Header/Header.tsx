@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const openMenu = () => {
+  const handleMenuClick = () => {
     setIsOpen((prev) => !prev);
   };
 
@@ -16,7 +16,7 @@ export function Header() {
       <div className={styles.navLogo}>
         <Image className={styles.logoImage} src="/image/logo.png" alt="Logo" width={113.33} height={17} />
       </div>
-      <NavBurger onClick={openMenu} />
+      <NavBurger onClick={handleMenuClick} />
       {isOpen ? <NavMenu /> : ""}      
     </nav>
   );

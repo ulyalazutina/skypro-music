@@ -1,0 +1,74 @@
+.container {
+    position: relative;
+}
+
+.filterButton {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid #ffffff;
+    border-radius: 60px;
+    padding: 6px 20px;
+}
+
+.container:not(:last-child) {
+    margin-right: 10px;
+}
+
+.btnText:hover {
+    border-color: #d9b6ff;
+    color: #d9b6ff;
+    cursor: pointer;
+}
+
+.btnText:active {
+    border-color: #ad61ff;
+    color: #ad61ff;
+    cursor: pointer;
+}
+
+.wrapper {
+    padding: 34px;
+    border-radius: 12px;
+    background: rgb(49, 49, 49);
+    position: absolute;
+    top: 50px;
+    left: 0px;
+}
+
+.items {
+    display: grid;
+    gap: 28px;
+    overflow-y: auto;
+    max-height: 237px;
+    padding-right: 24px;
+}
+
+.items::-webkit-scrollbar {
+    width: 4px;
+}
+
+.items::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgb(75, 73, 73);
+
+}
+
+.items::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+
+.item {
+    color: rgb(255, 255, 255);
+    font-family: StratosSkyeng, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: left;
+    text-wrap: nowrap;
+}
