@@ -6,15 +6,21 @@ import { useState } from "react";
 export function Filter() {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const handleFilterClick = (newFilter: string) => {
-    setActiveFilter(newFilter);
+    setActiveFilter((prev) => (newFilter === prev ? null : newFilter));
   };
 
   return (
     <div className={styles.centerblockFilter}>
       <div className={styles.filterTitle}>Искать по:</div>
-      <FilterItem onClick={() => handleFilterClick("authors")} isOpened={activeFilter === "authors"}>исполнителю</FilterItem>
-      <FilterItem onClick={() => handleFilterClick("years")} isOpened={activeFilter === "years"}>году выпуска</FilterItem>
-      <FilterItem onClick={() => handleFilterClick("genres")} isOpened={activeFilter === "genres"}>жанру</FilterItem>
+      <FilterItem onClick={() => handleFilterClick("authors")} isOpened={activeFilter === "authors"}>
+        исполнителю
+      </FilterItem>
+      <FilterItem onClick={() => handleFilterClick("years")} isOpened={activeFilter === "years"}>
+        году выпуска
+      </FilterItem>
+      <FilterItem onClick={() => handleFilterClick("genres")} isOpened={activeFilter === "genres"}>
+        жанру
+      </FilterItem>
     </div>
   );
 }
