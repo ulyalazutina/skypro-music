@@ -12,7 +12,7 @@ type FilterItemProps = {
 export function FilterItem({ children, onClick, isOpened, list }: FilterItemProps) {
   return (
     <div className={styles.container}>
-      <div onClick={onClick} className={classNames(styles.filterButton, styles.btnText)}>
+      <div onClick={onClick} className={classNames(styles.filterButton, styles.btnText, isOpened && styles.btnActive)}>
         {children}
       </div>
       {isOpened && (

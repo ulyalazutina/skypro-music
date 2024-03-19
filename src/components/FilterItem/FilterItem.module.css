@@ -62,7 +62,6 @@
     cursor: pointer;
 }
 
-
 .item {
     color: rgb(255, 255, 255);
     font-family: StratosSkyeng, sans-serif;
@@ -72,4 +71,9 @@
     letter-spacing: 0%;
     text-align: left;
     text-wrap: nowrap;
+}
+
+.btnActive {
+    border-color: #ad61ff;
+    color: #ad61ff;
 }
