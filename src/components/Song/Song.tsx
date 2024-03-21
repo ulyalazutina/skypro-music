@@ -8,7 +8,7 @@ export default function Song({ item }: { item: trackType }) {
 
   const togglePlay = () => {
     const audio = audioRef.current;
-    console.log(audio);
+    console.log(item.name);
     if (isPlaying) {
       audio.pause();
     } else {
@@ -16,7 +16,7 @@ export default function Song({ item }: { item: trackType }) {
     }
     setIsPlaying((prev) => !prev);
   };
-  
+
   return (
     <div className={styles.playlistItem}>
       <audio ref={audioRef} src={item.track_file}></audio>
