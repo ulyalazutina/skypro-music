@@ -3,9 +3,9 @@ import styles from "./page.module.css";
 import { Search } from "@components/Search/Search";
 import { Filter } from "@components/Filter/Filter";
 import { Column } from "@components/Column/Column";
-import { Song } from "@components/Song/Song";
 import { Sidebar } from "@components/Sidebar/Sidebar";
 import { Bar } from "@components/Bar/Bar";
+import Playlist from "@components/Playlist/Playlist";
 
 export default function Home() {
   return (
@@ -19,9 +19,7 @@ export default function Home() {
             <Filter />
             <div className={styles.centerblockContent}>
               <Column />
-              <div className={styles.contentPlaylist}>
-                <Song />
-              </div>
+              <Playlist />
             </div>
           </div>
           <Sidebar />
