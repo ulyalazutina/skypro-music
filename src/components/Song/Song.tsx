@@ -2,27 +2,17 @@
 import { useRef, useState } from "react";
 import styles from "./Song.module.css";
 
-export default function Song({ item }: { item: trackType }) {
-  const audioRef = useRef<any>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+type SongProps = {
+  item: trackType;
+  setCurrentTrack: () => void;
+};
 
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    console.log(item.name);
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    setIsPlaying((prev) => !prev);
-  };
-
+export default function Song({ item, setCurrentTrack }: SongProps) {
   return (
     <div className={styles.playlistItem}>
-      <audio ref={audioRef} src={item.track_file}></audio>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
-          <div className={styles.trackTitleImage} onClick={togglePlay}>
+          <div className={styles.trackTitleImage} onClick={setCurrentTrack}>
             <svg className={styles.trackTitleSvg}>
               <use xlinkHref="/image/icon/sprite.svg#icon-note" />
             </svg>
