@@ -2,13 +2,15 @@ import classNames from "classnames";
 import styles from "./Bar.module.css";
 import { Player } from "@components/Player/Player";
 
-export function Bar() {
+type BarProps = {currentTrack: trackType | null}
+
+export function Bar({currentTrack} : BarProps) {
   return (
     <div className={styles.bar}>
       <div className={styles.barContent}>
         <div className={styles.barPlayerProgress} />
         <div className={styles.barPlayerBlock}>
-          <Player />
+          <Player currentTrack={currentTrack}/>
           <div className={styles.barVolumeBlock}>
             <div className={styles.volumeContent}>
               <div className={styles.volumeImage}>
