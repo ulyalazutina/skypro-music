@@ -1,17 +1,18 @@
 import classNames from "classnames";
 import styles from "./Player.module.css";
-import { useRef, useState } from "react";
+import { MouseEventHandler, useRef, useState } from "react";
 
 type PlayerProps = { currentTrack: trackType | null };
 
 export function Player({ currentTrack }: PlayerProps) {
   const audioRef = useRef<null | HTMLAudioElement>(null);
-
   // Состояние для управления воспроизведением
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  // Состояние для управления зацикливанием
+  const [isLoop, setIsLoop] = useState<boolean>(false);
 
   // Функция для воспроизведения и паузы
-  const togglePlay = () => {
+  const togglePlay = (): void => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
@@ -19,6 +20,15 @@ export function Player({ currentTrack }: PlayerProps) {
         audioRef.current.play();
       }
       setIsPlaying((prev) => !prev);
+    }
+  };
+
+  // Функция для зацикливания треков
+  const toggleLoop = (): void => {
+    if (audioRef.current) {
+      audioRef.current.loop = !isLoop;
+      setIsLoop((prev) => !prev);
+      console.log(audioRef.current.loop);
     }
   };
 
@@ -45,9 +55,13 @@ export function Player({ currentTrack }: PlayerProps) {
             <use xlinkHref="/image/icon/sprite.svg#icon-next" />
           </svg>
         </div>
-        <div className={classNames(styles.playerBtnRepeat, styles._btnIcon)}>
+        <div onClick={toggleLoop} className={classNames(styles.playerBtnRepeat, styles._btnIcon)}>
           <svg className={styles.playerBtnRepeatSvg}>
-            <use xlinkHref="/image/icon/sprite.svg#icon-repeat" />
+            {isLoop ? (
+              <use xlinkHref="/image/icon/sprite.svg#icon-repeatOn" />
+            ) : (
+              <use xlinkHref="/image/icon/sprite.svg#icon-repeat" />
+            )}
           </svg>
         </div>
         <div className={classNames(styles.playerBtnShuffle, styles._btnIcon)}>
