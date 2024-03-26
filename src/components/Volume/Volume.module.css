@@ -1,0 +1,72 @@
+.barVolumeBlock {
+    width: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 92px 0 0;
+}
+
+.volumeContent {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+}
+
+.volumeImage {
+    width: 13px;
+    height: 18px;
+    margin-right: 17px;
+}
+
+.volumeSvg {
+    width: 13px;
+    height: 18px;
+    fill: transparent;
+}
+
+.volumeProgress {
+    width: 109px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.volumeProgressLine {
+    appearance: none;
+    width: 109px;
+    height: 2px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.volumeProgressLine::-webkit-slider-runnable-track {
+    height: 2px;
+    background: rgb(121, 121, 121);
+}
+
+.volumeProgressLine::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-top: -4px;
+    background: #393939;
+}
+
+.btn {
+    cursor: pointer;
+}

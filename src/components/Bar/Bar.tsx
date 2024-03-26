@@ -3,6 +3,7 @@ import styles from "./Bar.module.css";
 import { useEffect, useRef, useState } from "react";
 import ProgressBar from "@components/ProgressBar/ProgressBar";
 import formatTime from "../../libs/formatTime";
+import Volume from "@components/Volume/Volume";
 
 type BarProps = { currentTrack: trackType | null };
 
@@ -14,8 +15,6 @@ export function Bar({ currentTrack }: BarProps) {
   const [isLoop, setIsLoop] = useState<boolean>(false);
   // Состояние для отслеживания текущего времени воспроизведения
   const [currentTime, setCurrentTime] = useState<number>(0);
-  // Состояние для отслеживания громкости
-  const [volume, setVolume] = useState(0.5);
 
   // Функция для воспроизведения и паузы
   const togglePlay = (): void => {
@@ -32,6 +31,7 @@ export function Bar({ currentTrack }: BarProps) {
   // Функция для зацикливания треков
   const toggleLoop = (): void => {
     if (audioRef.current) {
+      console.log(audioRef);
       audioRef.current.loop = !isLoop;
       setIsLoop((prev) => !prev);
       console.log(audioRef.current.loop);
@@ -43,20 +43,6 @@ export function Bar({ currentTrack }: BarProps) {
     setCurrentTime(e.target.value);
     if (audioRef.current) {
       audioRef.current.currentTime = e.target.value;
-    }
-  };
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  // Функция для управления громкостью
-  const handleChangeVolume = (e: any) => {
-    setVolume(e.target.value);
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
     }
   };
 
@@ -148,28 +134,8 @@ export function Bar({ currentTrack }: BarProps) {
                 </div>
               </div>
             </div>
-          </div>{" "}
-          <div className={styles.barVolumeBlock}>
-            <div className={styles.volumeContent}>
-              <div className={styles.volumeImage}>
-                <svg className={styles.volumeSvg}>
-                  <use xlinkHref="/image/icon/sprite.svg#icon-volume" />
-                </svg>
-              </div>
-              <div className={classNames(styles.volumeProgress, styles.btn)}>
-                <input
-                  className={classNames(styles.volumeProgressLine, styles.btn)}
-                  type="range"
-                  name="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={volume}
-                  onChange={handleChangeVolume}
-                />
-              </div>
-            </div>
           </div>
+          <Volume audioRef={audioRef}/>
         </div>
       </div>
     </div>
