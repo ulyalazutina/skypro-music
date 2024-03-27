@@ -1,6 +1,6 @@
 import styles from "./ProgressBar.module.css";
 
-type ProgressBarProps = { max: number | string; value: number; step: number; onChange: (e: any) => void };
+type ProgressBarProps = { max: string; value: number; step: number; onChange: (e: any) => void };
 
 export default function ProgressBar({ max, value, step, onChange }: ProgressBarProps) {
   return (

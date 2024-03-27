@@ -60,7 +60,7 @@ export function Bar({ currentTrack }: BarProps) {
             : ""}
         </div>
         <ProgressBar
-          max={audioRef.current ? audioRef.current.duration : 0}
+          max={audioRef.current ? audioRef.current.duration.toString() : "0"}
           value={currentTime}
           step={0.01}
           onChange={handleChange}
@@ -69,7 +69,7 @@ export function Bar({ currentTrack }: BarProps) {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <div className={styles.playerControls}>
-              <div className={styles.playerBtnPrev}>
+              <div className={styles.playerBtnPrev} onClick={() => alert("Еще не реализовано")}>
                 <svg className={styles.playerBtPrevSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-prev" />
                 </svg>
@@ -83,7 +83,7 @@ export function Bar({ currentTrack }: BarProps) {
                   )}
                 </svg>
               </div>
-              <div className={styles.playerBtnNext}>
+              <div className={styles.playerBtnNext} onClick={() => alert("Еще не реализовано")}>
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-next" />
                 </svg>
@@ -97,7 +97,10 @@ export function Bar({ currentTrack }: BarProps) {
                   )}
                 </svg>
               </div>
-              <div className={classNames(styles.playerBtnShuffle, styles._btnIcon)}>
+              <div
+                className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
+                onClick={() => alert("Еще не реализовано")}
+              >
                 <svg className={styles.playerBtnShuffleSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
                 </svg>
@@ -135,7 +138,7 @@ export function Bar({ currentTrack }: BarProps) {
               </div>
             </div>
           </div>
-          <Volume audioRef={audioRef}/>
+          <Volume audioRef={audioRef} />
         </div>
       </div>
     </div>
