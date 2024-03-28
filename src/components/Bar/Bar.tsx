@@ -10,11 +10,15 @@ type BarProps = { currentTrack: trackType | null };
 export function Bar({ currentTrack }: BarProps) {
   const audioRef = useRef<null | HTMLAudioElement>(null);
   // Состояние для управления воспроизведением
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   // Состояние для управления зацикливанием
   const [isLoop, setIsLoop] = useState<boolean>(false);
   // Состояние для отслеживания текущего времени воспроизведения
   const [currentTime, setCurrentTime] = useState<number>(0);
+
+  useEffect(() => {
+    audioRef.current?.play();
+  }, []);
 
   // Функция для воспроизведения и паузы
   const togglePlay = (): void => {

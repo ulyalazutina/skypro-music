@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import styles from "./Volume.module.css";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
-export default function Volume({ audioRef }: any) {
+export default function Volume({ audioRef }: {audioRef: RefObject<HTMLAudioElement>}) {
   // Состояние для отслеживания громкости
   const [volume, setVolume] = useState(0.5);
 
