@@ -1,15 +1,22 @@
 "use client";
 import { useRef, useState } from "react";
 import styles from "./Song.module.css";
+import { useAppDispatch } from "../../hooks";
+import { setCurrentTrack } from "../../store/feautures/playlistSlice";
 
 type SongProps = {
   item: trackType;
-  setCurrentTrack: () => void;
+  // onCLick: () => void;
 };
 
-export default function Song({ item, setCurrentTrack }: SongProps) {
+export default function Song({ item }: SongProps) {
+  const dispatch = useAppDispatch();
+  const handleClick = () => {
+    // onCLick();
+    dispatch(setCurrentTrack(item))
+  }
   return (
-    <div className={styles.playlistItem} onClick={setCurrentTrack}>
+    <div className={styles.playlistItem} onClick={handleClick}>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>

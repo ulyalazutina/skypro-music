@@ -10,10 +10,10 @@ export default function Playlist({ setCurrentTrack }: PlaylistProps) {
   const [trackList, setTrackList] = useState([]);
   useEffect(() => {
     getTracks()
-      .then((data) => setTrackList(data))
-      .catch((error) => console.error("Произошла ошибка при получении списка треков:", error));
+    .then((data) => setTrackList(data))
+    .catch((error) => console.error("Произошла ошибка при получении списка треков:", error));
     setTrackList([]);
-  }, []);
+  }, [])
 
   return (
     <div className={styles.contentPlaylist}>
