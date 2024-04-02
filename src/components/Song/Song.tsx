@@ -10,12 +10,12 @@ type SongProps = {
   playlist: trackType[];
 };
 
-export default function Song({ item,onClick, playlist }: SongProps) {
+export default function Song({ item, onClick, playlist }: SongProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     onClick();
-    dispatch(setCurrentTrack({curentTrack: item, playlist}))
-  }
+    dispatch(setCurrentTrack({ curentTrack: item, playlist }));
+  };
   return (
     <div className={styles.playlistItem} onClick={handleClick}>
       <div className={styles.playlistTrack}>

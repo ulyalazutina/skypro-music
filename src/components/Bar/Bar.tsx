@@ -4,10 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import ProgressBar from "@components/ProgressBar/ProgressBar";
 import formatTime from "../../libs/formatTime";
 import Volume from "@components/Volume/Volume";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setNextTrack, setPrevTrack } from "../../store/feautures/playlistSlice";
 
-type BarProps = { currentTrack: trackType | null };
+// type BarProps = { currentTrack: trackType | null };
 
-export function Bar({ currentTrack }: BarProps) {
+export function Bar() {
+  const currentTrack = useAppSelector((store)=> store.playlist.currentTrack);
+  const dispatch = useAppDispatch();
   const audioRef = useRef<null | HTMLAudioElement>(null);
   // Состояние для управления воспроизведением
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -73,7 +77,7 @@ export function Bar({ currentTrack }: BarProps) {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <div className={styles.playerControls}>
-              <div className={styles.playerBtnPrev} onClick={() => alert("Еще не реализовано")}>
+              <div className={styles.playerBtnPrev} onClick={() => dispatch(setPrevTrack())}>
                 <svg className={styles.playerBtPrevSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-prev" />
                 </svg>
@@ -87,7 +91,7 @@ export function Bar({ currentTrack }: BarProps) {
                   )}
                 </svg>
               </div>
-              <div className={styles.playerBtnNext} onClick={() => alert("Еще не реализовано")}>
+              <div className={styles.playerBtnNext} onClick={() => dispatch(setNextTrack())}>
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-next" />
                 </svg>

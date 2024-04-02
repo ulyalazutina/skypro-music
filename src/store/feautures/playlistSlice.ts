@@ -30,8 +30,24 @@ const playlistSlice = createSlice({
             state.playlist = action.payload.playlist;
             state.shuffledPlaylist = [...action.payload.playlist].sort(()=>0.5 - Math.random(),)
         },
+        setNextTrack: (state) => {
+            const playlist = state.isShuffled ? state.shuffledPlaylist : state.playlist;
+            const currentTrackIndex = playlist.findIndex((track)=>track.id === state.currentTrack?.id);
+            const newTrack = playlist[currentTrackIndex + 1];
+            if (newTrack) {
+                state.currentTrack = newTrack;
+            }
+        },
+        setPrevTrack: (state) => {
+            const playlist = state.isShuffled ? state.shuffledPlaylist : state.playlist;
+            const currentTrackIndex = playlist.findIndex((track)=>track.id === state.currentTrack?.id);
+            const newTrack = playlist[currentTrackIndex - 1];
+            if (newTrack) {
+                state.currentTrack = newTrack;
+            }
+        }
     },
 });
 
-export const { setCurrentTrack } = playlistSlice.actions;
+export const { setCurrentTrack, setNextTrack, setPrevTrack } = playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;
