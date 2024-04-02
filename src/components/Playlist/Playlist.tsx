@@ -7,7 +7,7 @@ type PlaylistProps = { setCurrentTrack: (param: trackType) => void };
 
 export default function Playlist({ setCurrentTrack }: PlaylistProps) {
   //состояние для всех треков
-  const [trackList, setTrackList] = useState([]);
+  const [trackList, setTrackList] = useState<trackType[]>([]);
   useEffect(() => {
     getTracks()
     .then((data) => setTrackList(data))
@@ -18,7 +18,7 @@ export default function Playlist({ setCurrentTrack }: PlaylistProps) {
   return (
     <div className={styles.contentPlaylist}>
       {trackList.map((item, index) => {
-        return <Song setCurrentTrack={() => setCurrentTrack(item)} key={index} item={item} />;
+        return <Song onClick={() => setCurrentTrack(item)} key={index} item={item} playlist={trackList}/>;
       })}
     </div>
   );

@@ -8,6 +8,11 @@ type PlaylistStateType = {
     shuffledPlaylist: trackType[]
 };
 
+type setCurrentTrackType = {
+    curentTrack: trackType,
+    playlist: trackType[],
+}
+
 const initialState: PlaylistStateType = {
     playlist: [],
     currentTrack: null,
@@ -20,8 +25,10 @@ const playlistSlice = createSlice({
     name: "playlist",
     initialState,
     reducers: {
-        setCurrentTrack: (state, action: PayloadAction<trackType>) => {
-            state.currentTrack = action.payload;
+        setCurrentTrack: (state, action: PayloadAction<setCurrentTrackType>) => {
+            state.currentTrack = action.payload.curentTrack;
+            state.playlist = action.payload.playlist;
+            state.shuffledPlaylist = [...action.payload.playlist].sort(()=>0.5 - Math.random(),)
         },
     },
 });

@@ -6,14 +6,15 @@ import { setCurrentTrack } from "../../store/feautures/playlistSlice";
 
 type SongProps = {
   item: trackType;
-  // onCLick: () => void;
+  onClick: () => void;
+  playlist: trackType[];
 };
 
-export default function Song({ item }: SongProps) {
+export default function Song({ item,onClick, playlist }: SongProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
-    // onCLick();
-    dispatch(setCurrentTrack(item))
+    onClick();
+    dispatch(setCurrentTrack({curentTrack: item, playlist}))
   }
   return (
     <div className={styles.playlistItem} onClick={handleClick}>
