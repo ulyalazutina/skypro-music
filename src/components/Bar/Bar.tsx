@@ -23,7 +23,7 @@ export function Bar() {
 
   useEffect(() => {
     audioRef.current?.play();
-  }, []);
+  }, [currentTrack]);
 
   // Функция для воспроизведения и паузы
   const togglePlay = (): void => {
