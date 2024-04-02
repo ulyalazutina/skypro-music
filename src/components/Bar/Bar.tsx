@@ -5,14 +5,21 @@ import ProgressBar from "@components/ProgressBar/ProgressBar";
 import formatTime from "../../libs/formatTime";
 import Volume from "@components/Volume/Volume";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setCurrentTrack, setIsShuffled, setNextTrack, setPrevTrack } from "../../store/feautures/playlistSlice";
+import {
+  setCurrentTrack,
+  setIsPlay,
+  setIsShuffled,
+  setNextTrack,
+  setPrevTrack,
+} from "../../store/feautures/playlistSlice";
 
 // type BarProps = { currentTrack: trackType | null };
 
 export function Bar() {
+  const dispatch = useAppDispatch();
   const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
   const isShuffle = useAppSelector((store) => store.playlist.isShuffled);
-  const dispatch = useAppDispatch();
+  const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const audioRef = useRef<null | HTMLAudioElement>(null);
   // Состояние для управления воспроизведением
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -25,6 +32,14 @@ export function Bar() {
     audioRef.current?.play();
   }, [currentTrack]);
 
+  //автоматически переключает трек при завершении воспроизведения
+  useEffect(() => {
+    audioRef.current?.addEventListener("ended", () => dispatch(setNextTrack()));
+    return () => {
+      audioRef.current?.removeEventListener("ended", () => dispatch(setNextTrack()));
+    };
+  }, []);
+
   // Функция для воспроизведения и паузы
   const togglePlay = (): void => {
     if (audioRef.current) {
@@ -34,6 +49,7 @@ export function Bar() {
         audioRef.current.play();
       }
       setIsPlaying((prev) => !prev);
+      dispatch(setIsPlay(!isPlay));
     }
   };
 

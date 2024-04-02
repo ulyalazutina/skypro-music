@@ -1,8 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import styles from "./Song.module.css";
-import { useAppDispatch } from "../../hooks";
-import { setCurrentTrack } from "../../store/feautures/playlistSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setCurrentTrack, setIsPlay } from "../../store/feautures/playlistSlice";
+import classNames from "classnames";
 
 type SongProps = {
   item: trackType;
@@ -12,18 +13,25 @@ type SongProps = {
 
 export default function Song({ item, onClick, playlist }: SongProps) {
   const dispatch = useAppDispatch();
+  const isPlay = useAppSelector((store) => store.playlist.isPlaying);
+  const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
   const handleClick = () => {
     onClick();
     dispatch(setCurrentTrack({ curentTrack: item, playlist }));
+    dispatch(setIsPlay(!isPlay));
   };
   return (
     <div className={styles.playlistItem} onClick={handleClick}>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            <svg className={styles.trackTitleSvg}>
-              <use xlinkHref="/image/icon/sprite.svg#icon-note" />
-            </svg>
+            {currentTrack?.name === item.name ? (
+              <div className={classNames(styles.trackTitleSvg, styles.playingDot, {[styles.playingDotAnimation] : isPlay})}></div>
+            ) : (
+              <svg className={styles.trackTitleSvg}>
+                <use xlinkHref="/image/icon/sprite.svg#icon-note" />
+              </svg>
+            )}
           </div>
           <div
             onClick={(event) => {
