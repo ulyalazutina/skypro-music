@@ -27,7 +27,7 @@ export default function Main() {
         </div>
         <Sidebar />
       </main>
-      {currentTrack && <Bar currentTrack={currentTrack} />}
+      {currentTrack && <Bar />}
     </>
   );
 }
