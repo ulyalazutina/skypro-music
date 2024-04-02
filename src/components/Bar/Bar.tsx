@@ -5,12 +5,13 @@ import ProgressBar from "@components/ProgressBar/ProgressBar";
 import formatTime from "../../libs/formatTime";
 import Volume from "@components/Volume/Volume";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setNextTrack, setPrevTrack } from "../../store/feautures/playlistSlice";
+import { setCurrentTrack, setIsShuffled, setNextTrack, setPrevTrack } from "../../store/feautures/playlistSlice";
 
 // type BarProps = { currentTrack: trackType | null };
 
 export function Bar() {
-  const currentTrack = useAppSelector((store)=> store.playlist.currentTrack);
+  const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
+  const isShuffle = useAppSelector((store) => store.playlist.isShuffled);
   const dispatch = useAppDispatch();
   const audioRef = useRef<null | HTMLAudioElement>(null);
   // Состояние для управления воспроизведением
@@ -107,10 +108,14 @@ export function Bar() {
               </div>
               <div
                 className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
-                onClick={() => alert("Еще не реализовано")}
+                onClick={() => dispatch(setIsShuffled(!isShuffle))}
               >
                 <svg className={styles.playerBtnShuffleSvg}>
-                  <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
+                  {isShuffle ? (
+                    <use xlinkHref="/image/icon/sprite.svg#icon-shuffleOn" />
+                  ) : (
+                    <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
+                  )}
                 </svg>
               </div>
             </div>
