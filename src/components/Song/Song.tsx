@@ -7,16 +7,14 @@ import classNames from "classnames";
 
 type SongProps = {
   item: trackType;
-  onClick: () => void;
   playlist: trackType[];
 };
 
-export default function Song({ item, onClick, playlist }: SongProps) {
+export default function Song({ item, playlist }: SongProps) {
   const dispatch = useAppDispatch();
   const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
   const handleClick = () => {
-    onClick();
     dispatch(setCurrentTrack({ curentTrack: item, playlist }));
     dispatch(setIsPlay(!isPlay));
   };

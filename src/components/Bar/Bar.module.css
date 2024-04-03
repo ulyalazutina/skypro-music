@@ -158,6 +158,13 @@
     stroke: #696969;
 }
 
+.playerBtnShuffleOnSvg{
+    width: 19px;
+    height: 12px;
+    fill: transparent;
+    stroke: white;
+}
+
 ._btnIcon:hover svg {
     fill: transparent;
     stroke: #acacac;

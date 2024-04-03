@@ -6,12 +6,12 @@ import Playlist from "@components/Playlist/Playlist";
 import { Search } from "@components/Search/Search";
 import { Sidebar } from "@components/Sidebar/Sidebar";
 import styles from "./Main.module.css";
-import { useState } from "react";
 import { Bar } from "@components/Bar/Bar";
+import { useAppSelector } from "../../hooks";
 
 export default function Main() {
-  //состояние для текущего трека
-  const [currentTrack, setCurrentTrack] = useState<trackType | null>(null);
+  const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
+
   return (
     <>
       <main className={styles.main}>
@@ -22,7 +22,7 @@ export default function Main() {
           <Filter />
           <div className={styles.centerblockContent}>
             <Column />
-            <Playlist setCurrentTrack={setCurrentTrack} />
+            <Playlist />
           </div>
         </div>
         <Sidebar />

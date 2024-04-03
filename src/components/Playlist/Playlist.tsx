@@ -3,9 +3,7 @@ import styles from "./Playlist.module.css";
 import { getTracks } from "@api/tracks";
 import { useEffect, useState } from "react";
 
-type PlaylistProps = { setCurrentTrack: (param: trackType) => void };
-
-export default function Playlist({ setCurrentTrack }: PlaylistProps) {
+export default function Playlist() {
   //состояние для всех треков
   const [trackList, setTrackList] = useState<trackType[]>([]);
   useEffect(() => {
@@ -18,7 +16,7 @@ export default function Playlist({ setCurrentTrack }: PlaylistProps) {
   return (
     <div className={styles.contentPlaylist}>
       {trackList.map((item, index) => {
-        return <Song onClick={() => setCurrentTrack(item)} key={index} item={item} playlist={trackList}/>;
+        return <Song  key={index} item={item} playlist={trackList}/>;
       })}
     </div>
   );
