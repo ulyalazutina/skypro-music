@@ -93,6 +93,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .playerBtnPrev {
@@ -155,6 +156,13 @@
     height: 12px;
     fill: transparent;
     stroke: #696969;
+}
+
+.playerBtnShuffleOnSvg{
+    width: 19px;
+    height: 12px;
+    fill: transparent;
+    stroke: white;
 }
 
 ._btnIcon:hover svg {

@@ -4,13 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import ProgressBar from "@components/ProgressBar/ProgressBar";
 import formatTime from "../../libs/formatTime";
 import Volume from "@components/Volume/Volume";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import {
+  // setCurrentTrack,
+  setIsPlay,
+  setIsShuffled,
+  setNextTrack,
+  setPrevTrack,
+} from "../../store/feautures/playlistSlice";
 
-type BarProps = { currentTrack: trackType | null };
+// type BarProps = { currentTrack: trackType | null };
 
-export function Bar({ currentTrack }: BarProps) {
+export function Bar() {
+  const dispatch = useAppDispatch();
+  const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
+  const isShuffle = useAppSelector((store) => store.playlist.isShuffled);
+  const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const audioRef = useRef<null | HTMLAudioElement>(null);
-  // Состояние для управления воспроизведением
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+
   // Состояние для управления зацикливанием
   const [isLoop, setIsLoop] = useState<boolean>(false);
   // Состояние для отслеживания текущего времени воспроизведения
@@ -18,17 +29,26 @@ export function Bar({ currentTrack }: BarProps) {
 
   useEffect(() => {
     audioRef.current?.play();
+    dispatch(setIsPlay(true));
+  }, [currentTrack]);
+
+  //автоматически переключает трек при завершении воспроизведения
+  useEffect(() => {
+    audioRef.current?.addEventListener("ended", () => dispatch(setNextTrack()));
+    return () => {
+      audioRef.current?.removeEventListener("ended", () => dispatch(setNextTrack()));
+    };
   }, []);
 
   // Функция для воспроизведения и паузы
   const togglePlay = (): void => {
     if (audioRef.current) {
-      if (isPlaying) {
+      if (isPlay) {
         audioRef.current.pause();
       } else {
         audioRef.current.play();
       }
-      setIsPlaying((prev) => !prev);
+      dispatch(setIsPlay(!isPlay));
     }
   };
 
@@ -73,21 +93,21 @@ export function Bar({ currentTrack }: BarProps) {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <div className={styles.playerControls}>
-              <div className={styles.playerBtnPrev} onClick={() => alert("Еще не реализовано")}>
+              <div className={styles.playerBtnPrev} onClick={() => dispatch(setPrevTrack())}>
                 <svg className={styles.playerBtPrevSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-prev" />
                 </svg>
               </div>
               <div onClick={togglePlay} className={classNames(styles.playerBtnPlay, styles._btn)}>
                 <svg className={styles.playerBtnPlaySvg}>
-                  {isPlaying ? (
+                  {isPlay ? (
                     <use xlinkHref="/image/icon/sprite.svg#icon-pause" />
                   ) : (
                     <use xlinkHref="/image/icon/sprite.svg#icon-play" />
                   )}
                 </svg>
               </div>
-              <div className={styles.playerBtnNext} onClick={() => alert("Еще не реализовано")}>
+              <div className={styles.playerBtnNext} onClick={() => dispatch(setNextTrack())}>
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="/image/icon/sprite.svg#icon-next" />
                 </svg>
@@ -103,11 +123,17 @@ export function Bar({ currentTrack }: BarProps) {
               </div>
               <div
                 className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
-                onClick={() => alert("Еще не реализовано")}
+                onClick={() => dispatch(setIsShuffled(!isShuffle))}
               >
-                <svg className={styles.playerBtnShuffleSvg}>
-                  <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
-                </svg>
+                {isShuffle ? (
+                  <svg className={styles.playerBtnShuffleOnSvg}>
+                    <use xlinkHref="/image/icon/sprite.svg#icon-shuffleOn" />
+                  </svg>
+                ) : (
+                  <svg className={styles.playerBtnShuffleSvg}>
+                    <use xlinkHref="/image/icon/sprite.svg#icon-shuffle" />
+                  </svg>
+                )}
               </div>
             </div>
             <div className={styles.playerTrackPlay}>

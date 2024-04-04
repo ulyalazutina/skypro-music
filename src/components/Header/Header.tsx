@@ -17,7 +17,7 @@ export function Header() {
         <Image className={styles.logoImage} src="/image/logo.png" alt="Logo" width={113.33} height={17} />
       </div>
       <NavBurger onClick={handleMenuClick} />
-      {isOpen ? <NavMenu /> : ""}      
+      {isOpen ? <NavMenu /> : ""}
     </nav>
   );
 }
