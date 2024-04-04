@@ -29,6 +29,7 @@ export function Bar() {
 
   useEffect(() => {
     audioRef.current?.play();
+    dispatch(setIsPlay(true));
   }, [currentTrack]);
 
   //автоматически переключает трек при завершении воспроизведения
