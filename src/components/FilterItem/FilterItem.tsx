@@ -11,10 +11,26 @@ type FilterItemProps = {
   onClick: () => void;
   isOpened: boolean;
   list: string[];
-  toggleSelectedAuthors: (authors:string)=>void
+  filter: string;
+  // toggleSelectedAuthors: (authors:string)=>void
 };
 
-export function FilterItem({ children, onClick, isOpened, list, toggleSelectedAuthors }: FilterItemProps) {
+export function FilterItem({ children, onClick, isOpened, list, filter }: FilterItemProps) {
+  const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
+  const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
+  const dispatch = useDispatch();
+
+  const toggleSelectedAuthors = (author:string) => { 
+    dispatch(setActiveFilter({
+      authors: selectedAuthors.includes(author) ? selectedAuthors.filter((item)=>{item !== author}): [...selectedAuthors, author]
+    }))
+  };
+  
+  const toggleSelectedGenres = (genre:string) => {
+    dispatch(setActiveFilter({
+      genres: selectedGenres.includes(genre) ? selectedGenres.filter((item)=>{item !== genre}): [...selectedAuthors, genre]
+    }))
+  };
 
   return (
     <div className={styles.container}>
@@ -25,7 +41,7 @@ export function FilterItem({ children, onClick, isOpened, list, toggleSelectedAu
         <div className={styles.wrapper}>
           <ul className={styles.items}>
             {list.map((item, index) => (
-              <li onClick={()=>toggleSelectedAuthors(item)} className={styles.item} key={index}>{item}</li>
+              <li onClick={()=> filter === "authors" ? toggleSelectedAuthors(item) : toggleSelectedGenres(item)} className={styles.item} key={index}>{item}</li>
             ))}
           </ul>
         </div>
