@@ -11,8 +11,8 @@ import { setActiveFilter } from "../../store/feautures/playlistSlice";
 
 export function Filter() {
   const playlist = useAppSelector((store) => store.playlist.playlist);
-  console.log(playlist);
   const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
+  console.log(selectedAuthors);
   const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
   const dispatch = useDispatch();
 

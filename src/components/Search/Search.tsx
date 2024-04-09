@@ -6,31 +6,21 @@ import { setActiveFilter } from "../../store/feautures/playlistSlice";
 
 export function Search() {
   const inputText = useAppSelector((store) => store.playlist.activeFilters.searchValue);
-  const selected = useAppSelector((store)=>store.playlist.filteredPlaylist);
-  // console.log(selected);
+
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<string>("");
 
-  // const toggleSelectedAuthors = (resultSearch:string) => {
-  //   dispatch(setActiveFilter({
-  //     searchValue: inputText.includes(value:string);
-  //     // authors: selectedAuthors.includes(value) ? selectedAuthors.filter((item)=>{item !== author}): [...selectedAuthors, author]
-  //   }))
-  // };
-
-  const toggleSelectedTrack = (value: string) => {
+  const handleSearch = (value: string) => {
     dispatch(
       setActiveFilter({
-        searchValue: inputText.includes(value.toLowerCase()) ? value : value,
-        // authors: selectedAuthors.includes(value) ? selectedAuthors.filter((item)=>{item !== author}): [...selectedAuthors, author]
+        searchValue: inputText.includes(value.toLowerCase()) ? "" : value,
       }),
     );
   };
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
-      console.log(value);
-      toggleSelectedTrack(value);
+        handleSearch(value);        
     }
   };
 
