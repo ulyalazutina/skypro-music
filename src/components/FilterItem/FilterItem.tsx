@@ -17,6 +17,7 @@ type FilterItemProps = {
 
 export function FilterItem({ children, onClick, isOpened, list, filter }: FilterItemProps) {
   const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
+  console.log(selectedAuthors.length);
   const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
   const dispatch = useDispatch();
 
@@ -36,6 +37,8 @@ export function FilterItem({ children, onClick, isOpened, list, filter }: Filter
     <div className={styles.container}>
       <div onClick={onClick} className={classNames(styles.filterButton, styles.btnText, isOpened && styles.btnActive)}>
         {children}
+      {filter === "authors" && selectedAuthors.length !== 0 ? (<div className={styles.count}><p className={styles.countText}>{selectedAuthors.length}</p></div>): null}
+      {filter === "genres" && selectedGenres.length !== 0 ? (<div className={styles.count}><p className={styles.countText}>{selectedGenres.length}</p></div>): null}
       </div>
       {isOpened && (
         <div className={styles.wrapper}>
