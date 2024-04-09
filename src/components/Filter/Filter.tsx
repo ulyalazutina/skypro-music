@@ -1,36 +1,74 @@
 "use client";
 import { FilterItem } from "@components/FilterItem/FilterItem";
 import styles from "./Filter.module.css";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { authors, genres, years } from "./data";
 import { categories } from "./categories";
+import { getListItem } from "../../libs/getListItems";
+import { useAppSelector } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { setActiveFilter } from "../../store/feautures/playlistSlice";
 
 export function Filter() {
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const playlist = useAppSelector((store) => store.playlist.playlist);
+  const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
+  const selected = useAppSelector((store) => store.playlist.filteredPlaylist);
+  console.log(selected);
+
+  const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
+  const dispatch = useDispatch();
+  //было
+  const [activeFilterPopUp, setActiveFilterPopUp] = useState<string | null>(null);
   const handleFilterClick = (newFilter: categories) => {
-    setActiveFilter((prev) => (newFilter === prev ? null : newFilter));
+    setActiveFilterPopUp((prev) => (newFilter === prev ? null : newFilter));
   };
+  const [localActiveFilter, setLocalActiveFilter] = useState<trackType | null>(null);
+  const toggleSelectedAuthors = (author:string) => { 
+    dispatch(setActiveFilter({
+      authors: selectedAuthors.includes(author) ? selectedAuthors.filter((item)=>{item !== author}): [...selectedAuthors, author]
+    }))
+  };
+
+  // console.log(selected);
+
+
+  // const toggleSelectedGenres = (genre:string) => {
+  //   dispatch(setActiveFilter({
+  //     genres: selectedGenres.includes(genre) ? selectedGenres.filter((item)=>{item !== genre}): [...selectedAuthors, genre]
+  //   }))
+  // };
+  // const memoizedGetListItem = useMemo(() => {
+  //   if (activeFilter) {
+  //     return getListItem(activeFilter, localActiveFilter);
+  //   }
+  //   return [];
+  // }, [localActiveFilter, playlist]);
 
   return (
     <div className={styles.centerblockFilter}>
       <div className={styles.filterTitle}>Искать по:</div>
       <FilterItem
         onClick={() => handleFilterClick(categories.Authors)}
-        isOpened={activeFilter === "authors"}
-        list={authors}
+        isOpened={activeFilterPopUp === "authors"}
+        list={getListItem("author", playlist)}
+        toggleSelectedAuthors = {(authors)=>toggleSelectedAuthors(authors)}
+        // f = {()=>toggleSelectedAuthors}
       >
         исполнителю
       </FilterItem>
-      <FilterItem onClick={() => handleFilterClick(categories.Years)} isOpened={activeFilter === "years"} list={years}>
+      {/* <FilterItem 
+        onClick={() => handleFilterClick(categories.Years)} 
+        isOpened={activeFilterPopUp === "years"} 
+        list={getListItem("release_date", playlist)}>
         году выпуска
       </FilterItem>
       <FilterItem
         onClick={() => handleFilterClick(categories.Genres)}
-        isOpened={activeFilter === "genres"}
-        list={genres}
+        isOpened={activeFilterPopUp === "genres"}
+        list={getListItem("genre", playlist)}
       >
         жанру
-      </FilterItem>
+      </FilterItem> */}
     </div>
   );
 }

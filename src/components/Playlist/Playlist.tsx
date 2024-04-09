@@ -2,22 +2,34 @@ import Song from "@components/Song/Song";
 import styles from "./Playlist.module.css";
 import { getTracks } from "@api/tracks";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { setPlaylist } from "../../store/feautures/playlistSlice";
 
 export default function Playlist() {
-  //состояние для всех треков
-  const [trackList, setTrackList] = useState<trackType[]>([]);
+  //все треки
+  const playlist = useAppSelector((store) => store.playlist.playlist);
+  const filteredPlaylist = useAppSelector((store) => store.playlist.filteredPlaylist);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     getTracks()
-    .then((data) => setTrackList(data))
-    .catch((error) => console.error("Произошла ошибка при получении списка треков:", error));
-    setTrackList([]);
+      .then((data) => dispatch(setPlaylist(data))).catch((error) => {
+        console.error("Произошла ошибка при получении списка треков:", error);
+        dispatch(setPlaylist([]))
+      });
   }, [])
 
   return (
     <div className={styles.contentPlaylist}>
-      {trackList.map((item, index) => {
-        return <Song  key={index} item={item} playlist={trackList}/>;
-      })}
+      {
+      filteredPlaylist.length === 0 ? 
+      playlist.map((item, index) => {
+        return <Song key={index} item={item} playlist={playlist} />;
+      }) 
+      : 
+      filteredPlaylist.map((item, index) => { return <Song key={index} item={item} playlist={playlist} />; })
+      }
     </div>
   );
 }
