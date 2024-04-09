@@ -69,7 +69,9 @@ const playlistSlice = createSlice({
       state.filteredPlaylist = state.playlist.filter((track)=>{
         const isAuthors = state.activeFilters.authors.length > 0 ? state.activeFilters.authors.includes(track.author) : true;
         const isGenres = state.activeFilters.genres.length > 0 ? state.activeFilters.genres.includes(track.genre) : true;
-        return isAuthors && isGenres
+        const isSearch = state.activeFilters.searchValue !== "" ? track.name.toLowerCase().includes(state.activeFilters.searchValue) : true;
+        console.log(isSearch);
+        return isAuthors && isGenres && isSearch
       })
     }
   },

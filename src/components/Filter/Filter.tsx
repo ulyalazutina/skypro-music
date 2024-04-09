@@ -11,38 +11,27 @@ import { setActiveFilter } from "../../store/feautures/playlistSlice";
 
 export function Filter() {
   const playlist = useAppSelector((store) => store.playlist.playlist);
+  console.log(playlist);
   const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
-  const selected = useAppSelector((store) => store.playlist.filteredPlaylist);
-  console.log(selected);
-
   const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
   const dispatch = useDispatch();
-  //было
+
   const [activeFilterPopUp, setActiveFilterPopUp] = useState<string | null>(null);
   const handleFilterClick = (newFilter: categories) => {
     setActiveFilterPopUp((prev) => (newFilter === prev ? null : newFilter));
   };
-  const [localActiveFilter, setLocalActiveFilter] = useState<trackType | null>(null);
+  // const [localActiveFilter, setLocalActiveFilter] = useState<trackType | null>(null);
   const toggleSelectedAuthors = (author:string) => { 
     dispatch(setActiveFilter({
       authors: selectedAuthors.includes(author) ? selectedAuthors.filter((item)=>{item !== author}): [...selectedAuthors, author]
     }))
   };
 
-  // console.log(selected);
-
-
   // const toggleSelectedGenres = (genre:string) => {
   //   dispatch(setActiveFilter({
   //     genres: selectedGenres.includes(genre) ? selectedGenres.filter((item)=>{item !== genre}): [...selectedAuthors, genre]
   //   }))
   // };
-  // const memoizedGetListItem = useMemo(() => {
-  //   if (activeFilter) {
-  //     return getListItem(activeFilter, localActiveFilter);
-  //   }
-  //   return [];
-  // }, [localActiveFilter, playlist]);
 
   return (
     <div className={styles.centerblockFilter}>
@@ -52,7 +41,6 @@ export function Filter() {
         isOpened={activeFilterPopUp === "authors"}
         list={getListItem("author", playlist)}
         toggleSelectedAuthors = {(authors)=>toggleSelectedAuthors(authors)}
-        // f = {()=>toggleSelectedAuthors}
       >
         исполнителю
       </FilterItem>
@@ -61,11 +49,12 @@ export function Filter() {
         isOpened={activeFilterPopUp === "years"} 
         list={getListItem("release_date", playlist)}>
         году выпуска
-      </FilterItem>
-      <FilterItem
+      </FilterItem> */}
+      {/* <FilterItem
         onClick={() => handleFilterClick(categories.Genres)}
         isOpened={activeFilterPopUp === "genres"}
         list={getListItem("genre", playlist)}
+        toggleSelectedAuthors = {(authors)=>toggleSelectedAuthors(authors)}
       >
         жанру
       </FilterItem> */}
