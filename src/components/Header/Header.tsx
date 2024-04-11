@@ -3,13 +3,13 @@ import Image from "next/image";
 import styles from "./Header.module.css";
 import { NavBurger } from "@components/NavBurger/NavBurger";
 import { NavMenu } from "@components/NavMenu/NavMenu";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const handleMenuClick = () => {
+  const handleMenuClick = useCallback(() => {
     setIsOpen((prev) => !prev);
-  };
+  },[])
 
   return (
     <nav className={styles.mainNav}>

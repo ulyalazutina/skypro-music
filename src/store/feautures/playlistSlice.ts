@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import  Fuse  from "fuse.js";
 
 type PlaylistStateType = {
   playlist: trackType[];
@@ -65,13 +66,21 @@ const playlistSlice = createSlice({
         genres: action.payload.genres || state.activeFilters.genres,
         searchValue: action.payload.searchValue || state.activeFilters.searchValue,
       };
-      console.log(state.activeFilters);
-      state.filteredPlaylist = state.playlist.filter((track)=>{
+      const fuse = new Fuse(state.playlist, {
+        keys: ["name"],
+      });
+      const fuseResult = fuse.search(state.activeFilters.searchValue).map((item)=>item.item);
+      console.log(fuseResult);
+      const playlist = fuseResult.length ? fuseResult : state.playlist
+      state.filteredPlaylist = playlist.filter((track)=>{
         const isAuthors = state.activeFilters.authors.length > 0 ? state.activeFilters.authors.includes(track.author) : true;
         const isGenres = state.activeFilters.genres.length > 0 ? state.activeFilters.genres.includes(track.genre) : true;
-        const isSearch = state.activeFilters.searchValue !== "" ? track.name.toLowerCase().includes(state.activeFilters.searchValue) : true;
-        return isAuthors && isGenres && isSearch
+        // const isSearch = state.activeFilters.searchValue.length > 0 ? state.activeFilters.searchValue.includes(track.name) : false;
+        return isAuthors && isGenres
       })
+    },
+    setFilteredTracks: (state, action) =>{
+      state.filteredPlaylist = action.payload
     }
   },
 });
@@ -88,5 +97,5 @@ function changeTrack(direction: number) {
   };
 }
 
-export const { setCurrentTrack, setNextTrack, setPrevTrack, setIsShuffled, setIsPlay, setPlaylist, setActiveFilter } = playlistSlice.actions;
+export const { setCurrentTrack, setNextTrack, setPrevTrack, setIsShuffled,setFilteredTracks, setIsPlay, setPlaylist, setActiveFilter } = playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;

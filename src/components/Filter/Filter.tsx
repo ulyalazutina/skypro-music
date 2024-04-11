@@ -1,30 +1,18 @@
 "use client";
 import { FilterItem } from "@components/FilterItem/FilterItem";
 import styles from "./Filter.module.css";
-import { useMemo, useState } from "react";
-import { authors, genres, years } from "./data";
+import { useCallback, useState } from "react";
 import { categories } from "./categories";
 import { getListItem } from "../../libs/getListItems";
 import { useAppSelector } from "../../hooks";
-// import { useDispatch } from "react-redux";
 
 export function Filter() {
   const playlist = useAppSelector((store) => store.playlist.playlist);
-  const selectedAuthors = useAppSelector((store) => store.playlist.activeFilters.authors);
-  // console.log(selectedAuthors);
-  const selectedGenres = useAppSelector((store) => store.playlist.activeFilters.genres);
-  // const dispatch = useDispatch();
 
   const [activeFilterPopUp, setActiveFilterPopUp] = useState<string | null>(null);
-  const handleFilterClick = (newFilter: categories) => {
+  const handleFilterClick = useCallback((newFilter: categories) => {
     setActiveFilterPopUp((prev) => (newFilter === prev ? null : newFilter));
-  };
-
-  // const toggleSelectedGenres = (genre:string) => {
-  //   dispatch(setActiveFilter({
-  //     genres: selectedGenres.includes(genre) ? selectedGenres.filter((item)=>{item !== genre}): [...selectedAuthors, genre]
-  //   }))
-  // };
+  },[])
 
   return (
     <div className={styles.centerblockFilter}>

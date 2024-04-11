@@ -2,32 +2,37 @@ import { useState } from "react";
 import styles from "./Search.module.css";
 import { useAppSelector } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { setActiveFilter } from "../../store/feautures/playlistSlice";
+import { setActiveFilter, setFilteredTracks } from "../../store/feautures/playlistSlice";
 
 export function Search() {
   const inputText = useAppSelector((store) => store.playlist.activeFilters.searchValue);
-
+  const playlist = useAppSelector((store) => store.playlist.playlist);
+  const filteredPlaylist = useAppSelector((store) => store.playlist.filteredPlaylist);
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState<string>("");
+  const [results, setResults] = useState<string>("");
 
-  const handleSearch = (value: string) => {
-    dispatch(
-      setActiveFilter({
-        searchValue: inputText.includes(value.toLowerCase()) ? "" : value,
-      }),
-    );
-  };
-  const handleKeyPress = (event: any) => {
+  const handleSearch = () => {
+    dispatch(setActiveFilter({
+      searchValue: results
+    }))
+  }
+
+  function handleKeyPress(event: any) {
     if (event.key === "Enter") {
-        handleSearch(value);        
+      handleSearch()
     }
-  };
+  }
 
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
-    // console.log(e.target.value);
-  };
+  function handleChange(e: any) {
+    const { value } = e.currentTarget;
+    if (!value) {
+      return setResults("");
+    } else {
+      setResults(value);
+    }
+  }
+
   return (
     <div className={styles.centerblockSearch}>
       <svg className={styles.searchSvg}>
@@ -41,6 +46,7 @@ export function Search() {
         name="search"
         onChange={handleChange}
       />
+      {/* <pre>Результаты: {JSON.stringify(results, null, 1)}</pre> */}
     </div>
   );
 }

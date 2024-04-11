@@ -6,14 +6,11 @@ import formatTime from "../../libs/formatTime";
 import Volume from "@components/Volume/Volume";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
-  // setCurrentTrack,
   setIsPlay,
   setIsShuffled,
   setNextTrack,
   setPrevTrack,
 } from "../../store/feautures/playlistSlice";
-
-// type BarProps = { currentTrack: trackType | null };
 
 export function Bar() {
   const dispatch = useAppDispatch();
