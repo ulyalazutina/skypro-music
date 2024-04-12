@@ -1,9 +1,9 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, memo } from "react";
 import styles from "./NavBurger.module.css";
 
 type NavBurgerProp = { onClick: MouseEventHandler<HTMLDivElement>; }; 
 
-export const NavBurger: FC<NavBurgerProp> = ({ onClick }) => {
+export const NavBurger: FC<NavBurgerProp> = memo(({ onClick }) => {
   return (
     <div onClick={onClick} className={styles.navBurger}>
       <span className={styles.burgerLine} />
@@ -11,4 +11,5 @@ export const NavBurger: FC<NavBurgerProp> = ({ onClick }) => {
       <span className={styles.burgerLine} />
     </div>
   );
-}
+})
+NavBurger.displayName = "NavBurger";

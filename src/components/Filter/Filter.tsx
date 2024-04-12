@@ -1,33 +1,41 @@
 "use client";
 import { FilterItem } from "@components/FilterItem/FilterItem";
 import styles from "./Filter.module.css";
-import { useState } from "react";
-import { authors, genres, years } from "./data";
+import { useCallback, useState } from "react";
 import { categories } from "./categories";
+import { getListItem } from "../../libs/getListItems";
+import { useAppSelector } from "../../hooks";
 
 export function Filter() {
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  const handleFilterClick = (newFilter: categories) => {
-    setActiveFilter((prev) => (newFilter === prev ? null : newFilter));
-  };
+  const playlist = useAppSelector((store) => store.playlist.playlist);
+
+  const [activeFilterPopUp, setActiveFilterPopUp] = useState<string | null>(null);
+  const handleFilterClick = useCallback((newFilter: categories) => {
+    setActiveFilterPopUp((prev) => (newFilter === prev ? null : newFilter));
+  },[])
 
   return (
     <div className={styles.centerblockFilter}>
       <div className={styles.filterTitle}>Искать по:</div>
       <FilterItem
         onClick={() => handleFilterClick(categories.Authors)}
-        isOpened={activeFilter === "authors"}
-        list={authors}
+        isOpened={activeFilterPopUp === "authors"}
+        list={getListItem("author", playlist)}
+        filter = {categories.Authors}
       >
         исполнителю
       </FilterItem>
-      <FilterItem onClick={() => handleFilterClick(categories.Years)} isOpened={activeFilter === "years"} list={years}>
+      {/* <FilterItem 
+        onClick={() => handleFilterClick(categories.Years)} 
+        isOpened={activeFilterPopUp === "years"} 
+        list={getListItem("release_date", playlist)}>
         году выпуска
-      </FilterItem>
+      </FilterItem> */}
       <FilterItem
         onClick={() => handleFilterClick(categories.Genres)}
-        isOpened={activeFilter === "genres"}
-        list={genres}
+        isOpened={activeFilterPopUp === "genres"}
+        list={getListItem("genre", playlist)}
+        filter = {categories.Genres}
       >
         жанру
       </FilterItem>

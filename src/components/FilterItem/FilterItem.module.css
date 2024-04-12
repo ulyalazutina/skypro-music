@@ -10,6 +10,7 @@
     border: 1px solid #ffffff;
     border-radius: 60px;
     padding: 6px 20px;
+    position: relative;
 }
 
 .container:not(:last-child) {
@@ -75,5 +76,30 @@
 
 .btnActive {
     border-color: #ad61ff;
+    color: #ad61ff;
+}
+
+.count {
+    background: rgb(173, 97, 255);
+    width: 26px;
+    height: 26px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -15px;
+    right: -5px;
+}
+
+.countText{
+    color: rgb(255, 255, 255);
+    font-family: StratosSkyeng, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 13px;
+    letter-spacing: 0px;
+}
+.active{
     color: #ad61ff;
 }
