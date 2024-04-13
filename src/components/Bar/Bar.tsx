@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import styles from "./Bar.module.css";
 import { useEffect, useRef, useState } from "react";

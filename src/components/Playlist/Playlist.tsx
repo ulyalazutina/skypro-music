@@ -1,3 +1,4 @@
+"use client";
 import Song from "@components/Song/Song";
 import styles from "./Playlist.module.css";
 import { getTracks } from "@api/tracks";
@@ -6,19 +7,23 @@ import { useAppSelector } from "../../hooks";
 import { useDispatch } from "react-redux";
 import { setPlaylist } from "../../store/feautures/playlistSlice";
 
-export default function Playlist() {
+export default function Playlist({playlistId} : string | null) {
   //все треки
   const playlist = useAppSelector((store) => store.playlist.playlist);
   const filteredPlaylist = useAppSelector((store) => store.playlist.filteredPlaylist);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    getTracks()
-      .then((data) => dispatch(setPlaylist(data))).catch((error) => {
+    getTracks(playlistId)
+      .then((data) => {
+        data.items? 
+        dispatch(setPlaylist(data.items)) : dispatch(setPlaylist(data))
+      })
+        .catch((error) => {
         console.error("Произошла ошибка при получении списка треков:", error);
         dispatch(setPlaylist([]))
       });
-  }, [])
+  }, [dispatch, playlistId])
 
   return (
     <div className={styles.contentPlaylist}>
