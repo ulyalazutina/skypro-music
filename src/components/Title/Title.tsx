@@ -1,7 +1,10 @@
 import styles from "./Title.module.css";
 
-export default function Title({ playlistId }: string) {
+type TitleType = {
+    playlistID: string | null
+}
 
+export default function Title({ playlistID }: TitleType) {
     const TitleData =
         [
             {
@@ -19,8 +22,8 @@ export default function Title({ playlistId }: string) {
         ]
 
     return (
-        <h2 className={styles.centerblockTitle}>{playlistId ? TitleData.map((item) => {
-            if (item.id === playlistId) {
+        <h2 className={styles.centerblockTitle}>{playlistID ? TitleData.map((item) => {
+            if (item.id === playlistID) {
                 return item.text
             }
 

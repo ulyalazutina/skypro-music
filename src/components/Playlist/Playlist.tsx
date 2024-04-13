@@ -7,14 +7,18 @@ import { useAppSelector } from "../../hooks";
 import { useDispatch } from "react-redux";
 import { setPlaylist } from "../../store/feautures/playlistSlice";
 
-export default function Playlist({playlistId} : string | null) {
+type PlaylistType = {
+  playlistID: string | null
+}
+
+export default function Playlist({playlistID} : PlaylistType) {
   //все треки
   const playlist = useAppSelector((store) => store.playlist.playlist);
   const filteredPlaylist = useAppSelector((store) => store.playlist.filteredPlaylist);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    getTracks(playlistId)
+    getTracks(playlistID)
       .then((data) => {
         data.items? 
         dispatch(setPlaylist(data.items)) : dispatch(setPlaylist(data))
@@ -23,7 +27,7 @@ export default function Playlist({playlistId} : string | null) {
         console.error("Произошла ошибка при получении списка треков:", error);
         dispatch(setPlaylist([]))
       });
-  }, [dispatch, playlistId])
+  }, [dispatch, playlistID])
 
   return (
     <div className={styles.contentPlaylist}>

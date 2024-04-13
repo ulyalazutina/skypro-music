@@ -11,7 +11,7 @@ import { useAppSelector } from "../../hooks";
 import Title from "@components/Title/Title";
 
 type MainType = {
-  playlistID: string;
+  playlistID: string | null;
   isFilter?: boolean;
   isSideBar?: boolean;
 };
