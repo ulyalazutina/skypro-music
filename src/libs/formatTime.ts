@@ -1,12 +1,11 @@
 export default function formatTime(time: number | null) {
+  const pad = (val: any) => ("0" + val).slice(-2);
   if (time) {
-    let minutes = Math.trunc(time / 60)
-      .toString()
-      .padStart(2, "0");
-    let seconds = Math.floor(time % 60)
-      .toString()
-      .padStart(2, "0");
-    return `${minutes}:${seconds}`;
+    if (Math.floor(time / 3600) !== 0) {
+      return [Math.floor(time / 3600), Math.floor((time % 3600) / 60), time % 60].map(pad).join(":");
+    } else {
+      return [Math.floor((time % 3600) / 60), time % 60].map(pad).join(":");
+    }
   } else {
     return "";
   }

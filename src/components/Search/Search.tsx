@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import styles from "./Search.module.css";
 import { useAppSelector } from "../../hooks";
