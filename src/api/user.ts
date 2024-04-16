@@ -45,9 +45,8 @@ export async function signinUser({ email, password }: signinUserType) {
     });
 
     if (!res.ok) {
-        throw new Error("Ошибка при получении данных");
+        throw new Error("Ошибка");        
     }
-    console.log(res);
-
+    
     return res.json();
 }

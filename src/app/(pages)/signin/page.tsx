@@ -4,14 +4,13 @@ import classNames from "classnames";
 import Link from "next/link";
 import { FormWrapper } from "@components/FormWrapper/FormWrapper";
 import { signinUser } from "@api/user";
-// import { setFormData } from "@store/feautures/userSlice";
 import { useAppDispatch, useAppSelector } from "@hooks/hooks";
-import { useState } from "react";
-import { setSignin, setUser } from "@hooks/store/feautures/userSlice";
+import { setError, setSignin, setUser } from "@hooks/store/feautures/userSlice";
 import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const formData = useAppSelector((store) => store.user.formSignin);
+  const error = useAppSelector((store)=>store.user.error);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleInputChange = (e:any) => {
@@ -29,17 +28,21 @@ export default function SignInPage() {
     .then(()=>{
       router.push('/tracks')
     })
+    .catch((error) => {
+      dispatch(setError(error.message));
+    })
   }
   return (
     <FormWrapper>
       <input onChange={handleInputChange} value={formData.email} className={classNames(styles.modalInput, styles.login)} type="text" name="email" placeholder="Почта" />
       <input onChange={handleInputChange} value={formData.password} className={styles.modalInput} type="password" name="password" placeholder="Пароль" />
       <button type="button" onClick={signinBtn} className={styles.modalBtnEnter}>
-        <p>Войти</p>
+        <p className={styles.modalBtnEnterText}>Войти</p>
       </button>
       <button className={styles.modalBtnSignup}>
         <Link href="/signup">Зарегистрироваться</Link>
       </button>
+      {error !== null ? <p className={styles.errorMsq}>{error}</p> : null}
     </FormWrapper>
   );
 }

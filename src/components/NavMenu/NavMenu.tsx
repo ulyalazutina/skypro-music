@@ -11,7 +11,7 @@ export function NavMenu() {
                     </Link>
                 </li>
                 <li className={styles.menuItem}>
-                    <Link href="/MyTracksPage" className={styles.menuLink}>
+                    <Link href="/tracks/favorite" className={styles.menuLink}>
                         Мой плейлист
                     </Link>
                 </li>

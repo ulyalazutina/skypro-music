@@ -10,6 +10,7 @@ import { signupUser } from "@api/user";
 
 export default function SignUpPage() {
   const formData = useAppSelector((store) => store.user.formSignup);
+  const user = useAppSelector((store)=>store.user.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleInputChange = (e:any) => {
@@ -35,7 +36,7 @@ export default function SignUpPage() {
       <input onChange={handleInputChange} value={formData.password} className={styles.modalInput} type="password" name="password" placeholder="Пароль" />
       <input className={styles.modalInput} type="password" placeholder="Повторите пароль" />
       <button type="button" onClick={signupBtn} className={styles.modalBtnSignupEnt}>
-        <p>Зарегистрироваться</p>
+        <p className={styles.modalBtnSignupEntText}>Зарегистрироваться</p>
       </button>
     </FormWrapper>
   );

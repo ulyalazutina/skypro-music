@@ -1,16 +1,17 @@
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 type UserStateType = {
-  user: userType,
+  user: userType;
   formSignin: {
-    email:string,
-    password: string,
-  },
+    email: string;
+    password: string;
+  };
   formSignup: {
-    username: string,
-    email: string,
-    password: string,
-  }
+    username: string;
+    email: string;
+    password: string;
+  };
+  error: string | null;
 };
 
 const initialState: UserStateType = {
@@ -29,7 +30,8 @@ const initialState: UserStateType = {
     username: "",
     email: "",
     password: "",
-  }
+  },
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -37,21 +39,22 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      console.log(state.user = action.payload);
-      state.user = action.payload
+      state.user = action.payload;
     },
     setSignin: (state, action) => {
-      state.formSignin = action.payload
+      state.formSignin = action.payload;
     },
     setSignup: (state, action) => {
-      state.formSignup = action.payload
+      state.formSignup = action.payload;
     },
     setReset: () => {
-      return initialState
-      },
+      return initialState;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-
-export const {setUser, setSignin, setSignup, setReset} = userSlice.actions;
+export const { setUser, setSignin, setSignup, setReset, setError } = userSlice.actions;
 export const userReducer = userSlice.reducer;

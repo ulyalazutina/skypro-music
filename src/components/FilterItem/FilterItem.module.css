@@ -72,6 +72,7 @@
     letter-spacing: 0%;
     text-align: left;
     text-wrap: nowrap;
+    cursor: pointer;
 }
 
 .btnActive {
