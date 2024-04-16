@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type UserStateType = {
   user: userType,
@@ -12,7 +12,6 @@ type UserStateType = {
     password: string,
   }
 };
-
 
 const initialState: UserStateType = {
   user: {
@@ -46,10 +45,13 @@ const userSlice = createSlice({
     },
     setSignup: (state, action) => {
       state.formSignup = action.payload
-    }
+    },
+    setReset: () => {
+      return initialState
+      },
   },
 });
 
 
-export const {setUser, setSignin, setSignup} = userSlice.actions;
+export const {setUser, setSignin, setSignup, setReset} = userSlice.actions;
 export const userReducer = userSlice.reducer;

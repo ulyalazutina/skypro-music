@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const formData = useAppSelector((store) => store.user.formSignin);
-  const user = useAppSelector((store)=>store.user.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleInputChange = (e:any) => {
