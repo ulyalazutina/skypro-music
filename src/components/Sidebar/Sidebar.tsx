@@ -1,17 +1,21 @@
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
+import { useAppSelector } from "@hooks/hooks";
 
 export function Sidebar() {
+  const user = useAppSelector((store) => store.user.user);
+  console.log(user)
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.sidebarPersonal}>
-        <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
+        <Link href={"../../signin"} className={styles.sidebarPersonalName}>{user.username !== "" ? user.username : "Войти"}
         <div className={styles.sidebarIcon}>
           <svg>
             <use xlinkHref="/image/icon/sprite.svg#logout" />
           </svg>
         </div>
+        </Link>
       </div>
       <div className={styles.sidebarBlock}>
         <div className={styles.sidebarList}>
