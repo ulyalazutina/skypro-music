@@ -3,7 +3,7 @@ import styles from "./signin.module.css";
 import classNames from "classnames";
 import Link from "next/link";
 import { FormWrapper } from "@components/FormWrapper/FormWrapper";
-import { signinUser } from "@api/user";
+import { getToken, signinUser } from "@api/user";
 import { useAppDispatch, useAppSelector } from "@hooks/hooks";
 import { setError, setSignin, setUser } from "@hooks/store/feautures/userSlice";
 import { useRouter } from "next/navigation";
@@ -24,13 +24,19 @@ export default function SignInPage() {
   const signinBtn = () => {
     signinUser(formData).then((data)=>{
       dispatch(setUser(data));
+      localStorage.setItem('user', JSON.stringify(data));
+    })
+    .then(()=> {
+      getToken(formData).then((data)=> {
+        localStorage.setItem('token', JSON.stringify(data));
+      })
     })
     .then(()=>{
       router.push('/tracks')
     })
     .catch((error) => {
       dispatch(setError(error.message));
-    })
+    });
   }
   return (
     <FormWrapper>

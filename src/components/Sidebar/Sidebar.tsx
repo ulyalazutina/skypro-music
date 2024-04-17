@@ -7,22 +7,24 @@ import { setReset } from "@hooks/store/feautures/userSlice";
 export function Sidebar() {
   const user = useAppSelector((store) => store.user.user);
   const dispatch = useAppDispatch();
-  console.log(user);
+  const localUser = JSON.parse(localStorage.getItem('user'));
   const logoutUser = () => {
     dispatch(setReset());
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.sidebarPersonal}>
-        {user.username !== "" ? (
-          <p className={styles.sidebarPersonalName}>{user.username}</p>
+        {localUser ? (
+          <p className={styles.sidebarPersonalName}>{localUser.username}</p>
         ) : (
           <Link href={"../../signin"} className={styles.sidebarPersonalName}>
             Войти
           </Link>
         )}
 
-        {user.username !== "" ? (
+        {localUser ? (
           <div className={styles.sidebarIcon} onClick={logoutUser}>
             <svg>
               <use xlinkHref="/image/icon/sprite.svg#logout" />
