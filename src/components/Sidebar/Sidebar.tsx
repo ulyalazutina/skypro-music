@@ -1,30 +1,36 @@
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@hooks/hooks";
+import { useAppDispatch } from "@hooks/hooks";
 import { setReset } from "@hooks/store/feautures/userSlice";
+import { useRouter } from "next/navigation";
+import { getLocalUser } from "@hooks/libs/localStorage";
 
 export function Sidebar() {
-  const user = useAppSelector((store) => store.user.user);
   const dispatch = useAppDispatch();
-  const localUser = JSON.parse(localStorage.getItem('user'));
+  const router = useRouter();
+
   const logoutUser = () => {
     dispatch(setReset());
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem('tokenRefresh');
+    localStorage.removeItem('tokenAccess');
+    localStorage.removeItem('dateTokenAccess');
+    router.push("/signin");
   };
+
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.sidebarPersonal}>
-        {localUser ? (
-          <p className={styles.sidebarPersonalName}>{localUser.username}</p>
+        {getLocalUser ? (
+          <p className={styles.sidebarPersonalName}>{getLocalUser.username}</p>
         ) : (
           <Link href={"../../signin"} className={styles.sidebarPersonalName}>
             Войти
           </Link>
         )}
 
-        {localUser ? (
+        {getLocalUser ? (
           <div className={styles.sidebarIcon} onClick={logoutUser}>
             <svg>
               <use xlinkHref="/image/icon/sprite.svg#logout" />

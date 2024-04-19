@@ -47,7 +47,6 @@ export function Search() {
         name="search"
         onChange={handleChange}
       />
-      {/* <pre>Результаты: {JSON.stringify(results, null, 1)}</pre> */}
     </div>
   );
 }

@@ -105,3 +105,13 @@
     justify-content: center;
     font-family: StratosSkyeng, sans-serif;
 }
+
+.errorMsq{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #ce1717;
+    margin-top: 20px;
+}

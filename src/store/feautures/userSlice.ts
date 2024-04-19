@@ -12,6 +12,13 @@ type UserStateType = {
     password: string;
   };
   error: string | null;
+  isAuthorization: boolean;
+  dateToken: string;
+  errorValidate: {
+    username: string;
+    email: string;
+    password: string;
+  };
 };
 
 const initialState: UserStateType = {
@@ -32,6 +39,13 @@ const initialState: UserStateType = {
     password: "",
   },
   error: null,
+  isAuthorization: false,
+  dateToken: "",
+  errorValidate: {
+    username: "",
+    email: "",
+    password: "",
+  },
 };
 
 const userSlice = createSlice({
@@ -53,8 +67,18 @@ const userSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setIsAuthorization: (state, action) => {
+      state.isAuthorization = action.payload;
+    },
+    setDateToken: (state, action) => {
+      state.dateToken = action.payload;
+    },
+    setErrorValidate: (state, action) => {
+      state.errorValidate = action.payload
+    }
   },
 });
 
-export const { setUser, setSignin, setSignup, setReset, setError } = userSlice.actions;
+export const { setUser, setSignin, setSignup, setReset, setError, setIsAuthorization, setDateToken, setErrorValidate } =
+  userSlice.actions;
 export const userReducer = userSlice.reducer;

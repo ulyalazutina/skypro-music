@@ -1,4 +1,5 @@
 import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
+import { getLocalAccessToken } from "@hooks/libs/localStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Fuse from "fuse.js";
 
@@ -59,23 +60,24 @@ const playlistSlice = createSlice({
       state.lickedTrack = action.payload.likedTrack;
       state.playlist = action.payload.playlist;
       state.shuffledPlaylist = [...action.payload.playlist].sort(() => 0.5 - Math.random());
-      const token = JSON.parse(localStorage.getItem("token"));
+      console.log(state.isLiked);
       const trackId = state.lickedTrack.id;
-      const data = {
-        trackId: trackId,
-        accessToken: token.access,
-      };
-      if (state.isLiked) {
-        deleteFavotireTrack(data).then((res) => {
-          console.log(res);
-        });
-        state.isLiked = false;
-      } else {
-        addFavotireTrack(data).then((res) => {
-          console.log(res);
-        });
-        state.isLiked = true;
-
+      if (getLocalAccessToken) {
+        const data = {
+          trackId: trackId,
+          accessToken: getLocalAccessToken,
+        };
+        if (state.isLiked) {
+          deleteFavotireTrack(data).then((res) => {
+            console.log(res);
+          });
+          state.isLiked = !state.isLiked;
+        } else {
+          addFavotireTrack(data).then((res) => {
+            console.log(res);
+          });
+          state.isLiked = !state.isLiked;
+        }
       }
     },
     setPlaylist: (state, action: PayloadAction<trackType[]>) => {
