@@ -17,7 +17,8 @@ export async function getTracks(playlistId: string |  null) {
 }
 
 type favoriteType = { 
-  trackId: number, accessToken:string
+  trackId: number, 
+  accessToken: string,
 }
 
 export async function addFavotireTrack({trackId, accessToken}:favoriteType) {

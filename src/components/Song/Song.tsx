@@ -6,7 +6,7 @@ import classNames from "classnames";
 import formatTime from "../../libs/formatTime";
 import { setIsAuthorization } from "@hooks/store/feautures/userSlice";
 import { updateToken } from "@api/user";
-import { getLocalAccessToken, getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
+import { getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
 import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
 import { useState } from "react";
 
@@ -39,12 +39,12 @@ export default function Song({ item, playlist }: SongProps) {
   };
 
   const handleLiked = () => {
-    if (getLocalAccessToken) {
+    if (localStorage.getItem("tokenAccess")) {
       const data = {
         trackId: item.id,
-        accessToken: getLocalAccessToken,
+        accessToken: JSON.parse(localStorage.getItem("tokenAccess")),
       };
-      console.log(data);
+      console.log(data.accessToken);
       if (isLiked) {
         deleteFavotireTrack(data).then((res) => {
           console.log(res);
@@ -67,8 +67,6 @@ export default function Song({ item, playlist }: SongProps) {
       //дата нажатия на лайк
       const clickDate = new Date();
       let dateAccessToken = new Date(localStorage.getItem("dateTokenAccess"));
-      console.log(dateAccessToken);
-      console.log(clickDate);
       //проверка на устаревший токен
       if (Math.floor((clickDate.getTime() - dateAccessToken.getTime()) / 1000) > 200) {
         console.log("Прошло 200 секунд");

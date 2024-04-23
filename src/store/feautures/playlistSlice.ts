@@ -1,8 +1,5 @@
-import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
-import { getLocalAccessToken } from "@hooks/libs/localStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Fuse from "fuse.js";
-import { render } from "react-dom";
 
 type PlaylistStateType = {
   playlist: trackType[];
