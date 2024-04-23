@@ -27,8 +27,14 @@ export async function signupUser({ email, password, username }: signupUserType) 
         },
     });
 
-    if (!res.ok) {
-        throw new Error("Ошибка при получении данных");
+    if (res.status === 400) {
+        const erMsq = await res.json();
+        console.log(erMsq);
+        throw new Error(JSON.stringify(erMsq));
+    }
+
+    if (res.status === 500) {
+        throw new Error("Сервер сломался. Попробуйте позже");
     }
 
     return res.json();
@@ -47,19 +53,14 @@ export async function signinUser({ email, password }: signinUserType) {
     });
 
     if (res.status === 400) {
-        console.log(res.status);
         const erMsq = await res.json();
-        if (erMsq.password) {
-            throw new Error(erMsq.password);
-        } else {
-            throw new Error(erMsq.email);
-        }
+        throw new Error(JSON.stringify(erMsq));
     }
 
     if (res.status === 401) {
+
         const erMsq = await res.json();
-        console.log(erMsq.detail);
-        throw new Error(erMsq.detail);
+        throw new Error(JSON.stringify(erMsq));
     }
 
     if (res.status === 500) {

@@ -113,5 +113,14 @@
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #ce1717;
-    margin-top: 20px;
+}
+
+.errorRepeat{
+    margin-top: -15px;
+margin-bottom: 20px;
+}
+
+.errorPwd,.errorLogin,.errorName{
+    margin-top: -15px;
+    margin-bottom: 20px;
 }

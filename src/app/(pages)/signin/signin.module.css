@@ -25,7 +25,7 @@
 
 }
 
-.modalInput:focus{
+.modalInput:focus {
     outline: none;
 }
 
@@ -167,12 +167,20 @@
     margin-bottom: 30px;
 }
 
-.errorMsq{
+.errorMsq {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #ce1717;
-    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.errorPwd, .errorDetail {
+    margin-top: 10px;
+}
+
+.errorLogin {
+    margin-top: -20px;
 }

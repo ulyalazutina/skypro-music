@@ -1,30 +1,62 @@
 "use client";
 import styles from "./Song.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setCurrentTrack, setIsPlay, setLickedTrack } from "../../store/feautures/playlistSlice";
+import { setCurrentTrack, setIsPlay } from "../../store/feautures/playlistSlice";
 import classNames from "classnames";
 import formatTime from "../../libs/formatTime";
 import { setIsAuthorization } from "@hooks/store/feautures/userSlice";
 import { updateToken } from "@api/user";
-import { getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
-import { getTrackId } from "@api/tracks";
-import { useEffect } from "react";
+import { getLocalAccessToken, getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
+import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
+import { useState } from "react";
 
 type SongProps = {
   item: trackType;
   playlist: trackType[];
-  like: boolean;
 };
 
-export default function Song({ item, playlist, like }: SongProps) {
+export default function Song({ item, playlist }: SongProps) {
   const dispatch = useAppDispatch();
   const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
-  const dateGetAccessToken = useAppSelector((store) => store.user.dateToken);
+  // const dateGetAccessToken = useAppSelector((store) => store.user.dateToken);
+  const [isLiked, setIsLiked] = useState<boolean>(returnLike());
+  function returnLike() {
+    if (item.stared_user) {
+      if (item.stared_user.find((el) => el.id == getLocalUser?.id)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
   //включить/выключить трек
   const handleClick = () => {
     dispatch(setCurrentTrack({ curentTrack: item, playlist }));
     dispatch(setIsPlay(!isPlay));
+  };
+
+  const handleLiked = () => {
+    if (getLocalAccessToken) {
+      const data = {
+        trackId: item.id,
+        accessToken: getLocalAccessToken,
+      };
+      console.log(data);
+      if (isLiked) {
+        deleteFavotireTrack(data).then((res) => {
+          console.log(res);
+          setIsLiked(false);
+        });
+      } else {
+        addFavotireTrack(data).then((res) => {
+          console.log(res);
+          setIsLiked(true);
+        });
+      }
+    }
   };
 
   //клик на лайк
@@ -34,17 +66,17 @@ export default function Song({ item, playlist, like }: SongProps) {
     if (getLocalUser) {
       //дата нажатия на лайк
       const clickDate = new Date();
-      let dateAccessToken = new Date(dateGetAccessToken);
-
+      let dateAccessToken = new Date(localStorage.getItem("dateTokenAccess"));
+      console.log(dateAccessToken);
+      console.log(clickDate);
       //проверка на устаревший токен
       if (Math.floor((clickDate.getTime() - dateAccessToken.getTime()) / 1000) > 200) {
         console.log("Прошло 200 секунд");
-
         if (getLocalRefreshToken) {
           updateToken(getLocalRefreshToken)
             .then((data) => localStorage.setItem("tokenAccess", JSON.stringify(data.access)))
             .then(() => {
-              dispatch(setLickedTrack({ likedTrack: item, playlist }));
+              handleLiked();
             })
             .catch((error) => {
               console.warn(error);
@@ -52,7 +84,7 @@ export default function Song({ item, playlist, like }: SongProps) {
         }
       } else {
         console.log("Не прошло 200 секунд");
-        dispatch(setLickedTrack({ likedTrack: item, playlist }));
+        handleLiked();
       }
     } else {
       dispatch(setIsAuthorization(true));
@@ -108,13 +140,12 @@ export default function Song({ item, playlist, like }: SongProps) {
         </div>
         <div>
           <svg className={styles.trackTimeSvg} onClick={likeClick}>
-            {like ? (
+            {isLiked ? (
               <use xlinkHref="/image/icon/sprite.svg#icon-liked" />
             ) : (
               <use xlinkHref="/image/icon/sprite.svg#icon-like" />
             )}
           </svg>
-
           <span className={styles.trackTimeText}>{formatTime(item?.duration_in_seconds)}</span>
         </div>
       </div>

@@ -11,14 +11,8 @@ type UserStateType = {
     email: string;
     password: string;
   };
-  error: string | null;
   isAuthorization: boolean;
-  dateToken: string;
-  errorValidate: {
-    username: string;
-    email: string;
-    password: string;
-  };
+  // dateToken: string;
 };
 
 const initialState: UserStateType = {
@@ -38,14 +32,8 @@ const initialState: UserStateType = {
     email: "",
     password: "",
   },
-  error: null,
   isAuthorization: false,
-  dateToken: "",
-  errorValidate: {
-    username: "",
-    email: "",
-    password: "",
-  },
+  // dateToken: "",
 };
 
 const userSlice = createSlice({
@@ -64,21 +52,15 @@ const userSlice = createSlice({
     setReset: () => {
       return initialState;
     },
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
     setIsAuthorization: (state, action) => {
       state.isAuthorization = action.payload;
     },
-    setDateToken: (state, action) => {
-      state.dateToken = action.payload;
-    },
-    setErrorValidate: (state, action) => {
-      state.errorValidate = action.payload
-    }
+    // setDateToken: (state, action) => {
+    //   state.dateToken = action.payload;
+    // },
   },
 });
 
-export const { setUser, setSignin, setSignup, setReset, setError, setIsAuthorization, setDateToken, setErrorValidate } =
+export const { setUser, setSignin, setSignup, setReset,  setIsAuthorization } =
   userSlice.actions;
 export const userReducer = userSlice.reducer;

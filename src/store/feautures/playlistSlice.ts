@@ -2,6 +2,7 @@ import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
 import { getLocalAccessToken } from "@hooks/libs/localStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Fuse from "fuse.js";
+import { render } from "react-dom";
 
 type PlaylistStateType = {
   playlist: trackType[];
@@ -9,7 +10,7 @@ type PlaylistStateType = {
   lickedTrack: null | trackType;
   isPlaying: boolean;
   isShuffled: boolean;
-  isLiked: boolean;
+  // isLiked: boolean;
   shuffledPlaylist: trackType[];
   filteredPlaylist: trackType[];
   activeFilters: {
@@ -36,7 +37,7 @@ const initialState: PlaylistStateType = {
   lickedTrack: null,
   isPlaying: false,
   isShuffled: false,
-  isLiked: false,
+  // isLiked: false,
   shuffledPlaylist: [],
   filteredPlaylist: [],
   activeFilters: {
@@ -56,30 +57,30 @@ const playlistSlice = createSlice({
       state.playlist = action.payload.playlist;
       state.shuffledPlaylist = [...action.payload.playlist].sort(() => 0.5 - Math.random());
     },
-    setLickedTrack: (state, action: PayloadAction<setLikedTrackType>) => {
-      state.lickedTrack = action.payload.likedTrack;
-      state.playlist = action.payload.playlist;
-      state.shuffledPlaylist = [...action.payload.playlist].sort(() => 0.5 - Math.random());
-      console.log(state.isLiked);
-      const trackId = state.lickedTrack.id;
-      if (getLocalAccessToken) {
-        const data = {
-          trackId: trackId,
-          accessToken: getLocalAccessToken,
-        };
-        if (state.isLiked) {
-          deleteFavotireTrack(data).then((res) => {
-            console.log(res);
-          });
-          state.isLiked = !state.isLiked;
-        } else {
-          addFavotireTrack(data).then((res) => {
-            console.log(res);
-          });
-          state.isLiked = !state.isLiked;
-        }
-      }
-    },
+    // setLickedTrack: (state, action: PayloadAction<setLikedTrackType>) => {
+    //   state.lickedTrack = action.payload.likedTrack;
+    //   state.playlist = action.payload.playlist;
+    //   state.shuffledPlaylist = [...action.payload.playlist].sort(() => 0.5 - Math.random());
+    //   console.log(state.isLiked);
+    //   const trackId = state.lickedTrack.id;
+    //   if (getLocalAccessToken) {
+    //     const data = {
+    //       trackId: trackId,
+    //       accessToken: getLocalAccessToken,
+    //     };
+    //     if (state.isLiked) {
+    //       deleteFavotireTrack(data).then((res) => {
+    //         console.log(res);
+    //       });
+    //       state.isLiked = !state.isLiked;
+    //     } else {
+    //       addFavotireTrack(data).then((res) => {
+    //         console.log(res);
+    //       });
+    //       state.isLiked = !state.isLiked;
+    //     }
+    //   }
+    // },
     setPlaylist: (state, action: PayloadAction<trackType[]>) => {
       state.playlist = action.payload;
     },
@@ -144,7 +145,7 @@ function changeTrack(direction: number) {
 
 export const {
   setCurrentTrack,
-  setLickedTrack,
+  // setLickedTrack,
   setNextTrack,
   setPrevTrack,
   setIsShuffled,
