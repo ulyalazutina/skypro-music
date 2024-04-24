@@ -1,10 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import styles from "./Song.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setCurrentTrack, setIsPlay } from "../../store/feautures/playlistSlice";
 import classNames from "classnames";
 import formatTime from "../../libs/formatTime";
+import { setIsAuthorization } from "@hooks/store/feautures/userSlice";
+import { updateToken } from "@api/user";
+import { getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
+import { addFavotireTrack, deleteFavotireTrack } from "@api/tracks";
+import { useState } from "react";
 
 type SongProps = {
   item: trackType;
@@ -15,10 +19,76 @@ export default function Song({ item, playlist }: SongProps) {
   const dispatch = useAppDispatch();
   const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const currentTrack = useAppSelector((store) => store.playlist.currentTrack);
+  // const dateGetAccessToken = useAppSelector((store) => store.user.dateToken);
+  const [isLiked, setIsLiked] = useState<boolean>(returnLike());
+  function returnLike() {
+    if (item.stared_user) {
+      if (item.stared_user.find((el) => el.id == getLocalUser?.id)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+  //включить/выключить трек
   const handleClick = () => {
     dispatch(setCurrentTrack({ curentTrack: item, playlist }));
     dispatch(setIsPlay(!isPlay));
   };
+
+  const handleLiked = () => {
+    if (localStorage.getItem("tokenAccess")) {
+      const data = {
+        trackId: item.id,
+        accessToken: JSON.parse(localStorage.getItem("tokenAccess")),
+      };
+      console.log(data.accessToken);
+      if (isLiked) {
+        deleteFavotireTrack(data).then((res) => {
+          console.log(res);
+          setIsLiked(false);
+        });
+      } else {
+        addFavotireTrack(data).then((res) => {
+          console.log(res);
+          setIsLiked(true);
+        });
+      }
+    }
+  };
+
+  //клик на лайк
+  const likeClick = (event: any) => {
+    event.stopPropagation();
+    //проверка на наличие авторизации
+    if (getLocalUser) {
+      //дата нажатия на лайк
+      const clickDate = new Date();
+      let dateAccessToken = new Date(localStorage.getItem("dateTokenAccess"));
+      //проверка на устаревший токен
+      if (Math.floor((clickDate.getTime() - dateAccessToken.getTime()) / 1000) > 200) {
+        console.log("Прошло 200 секунд");
+        if (getLocalRefreshToken) {
+          updateToken(getLocalRefreshToken)
+            .then((data) => localStorage.setItem("tokenAccess", JSON.stringify(data.access)))
+            .then(() => {
+              handleLiked();
+            })
+            .catch((error) => {
+              console.warn(error);
+            });
+        }
+      } else {
+        console.log("Не прошло 200 секунд");
+        handleLiked();
+      }
+    } else {
+      dispatch(setIsAuthorization(true));
+    }
+  };
+
   return (
     <div className={styles.playlistItem} onClick={handleClick}>
       <div className={styles.playlistTrack}>
@@ -67,8 +137,12 @@ export default function Song({ item, playlist }: SongProps) {
           </a>
         </div>
         <div>
-          <svg className={styles.trackTimeSvg}>
-            <use xlinkHref="/image/icon/sprite.svg#icon-like" />
+          <svg className={styles.trackTimeSvg} onClick={likeClick}>
+            {isLiked ? (
+              <use xlinkHref="/image/icon/sprite.svg#icon-liked" />
+            ) : (
+              <use xlinkHref="/image/icon/sprite.svg#icon-like" />
+            )}
           </svg>
           <span className={styles.trackTimeText}>{formatTime(item?.duration_in_seconds)}</span>
         </div>

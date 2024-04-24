@@ -9,9 +9,13 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   setIsPlay,
   setIsShuffled,
+  // setLickedTrack,
   setNextTrack,
   setPrevTrack,
 } from "../../store/feautures/playlistSlice";
+// import { getLocalRefreshToken, getLocalUser } from "@hooks/libs/localStorage";
+// import { updateToken } from "@ap/i/user";
+// import { setIsAuthorization } from "@hooks/store/feautures/userSlice";
 
 export function Bar() {
   const dispatch = useAppDispatch();
@@ -19,6 +23,7 @@ export function Bar() {
   const isShuffle = useAppSelector((store) => store.playlist.isShuffled);
   const isPlay = useAppSelector((store) => store.playlist.isPlaying);
   const audioRef = useRef<null | HTMLAudioElement>(null);
+  const dateGetAccessToken = useAppSelector((store) => store.user.dateToken);
 
   // Состояние для управления зацикливанием
   const [isLoop, setIsLoop] = useState<boolean>(false);

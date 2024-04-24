@@ -4,6 +4,7 @@ import styles from "./Header.module.css";
 import { NavBurger } from "@components/NavBurger/NavBurger";
 import { NavMenu } from "@components/NavMenu/NavMenu";
 import { useCallback, useState } from "react";
+import Link from "next/link";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -13,9 +14,9 @@ export function Header() {
 
   return (
     <nav className={styles.mainNav}>
-      <div className={styles.navLogo}>
+      <Link href="/tracks" className={styles.navLogo}>
         <Image className={styles.logoImage} src="/image/logo.png" alt="Logo" width={113.33} height={17} />
-      </div>
+      </Link>
       <NavBurger onClick={handleMenuClick} />
       {isOpen ? <NavMenu /> : ""}
     </nav>

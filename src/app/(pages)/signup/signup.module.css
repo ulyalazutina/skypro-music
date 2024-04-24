@@ -19,6 +19,10 @@
 
 }
 
+.modalInput:focus{
+    outline: none;
+}
+
 .modalInput::-webkit-input-placeholder {
     font-style: normal;
     font-weight: 400;
@@ -70,7 +74,6 @@
     border-radius: 6px;
     margin-left: 4px;
     border: none;
-    margin-top: 30px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -82,7 +85,7 @@
     justify-content: center;
 }
 
-.modalBtnSignupEnt a {
+.modalBtnSignupEntText {
     width: 100%;
     height: 100%;
     font-style: normal;
@@ -101,4 +104,23 @@
     -ms-flex-pack: center;
     justify-content: center;
     font-family: StratosSkyeng, sans-serif;
+}
+
+.errorMsq{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #ce1717;
+}
+
+.errorRepeat{
+    margin-top: -15px;
+margin-bottom: 20px;
+}
+
+.errorPwd,.errorLogin,.errorName{
+    margin-top: -15px;
+    margin-bottom: 20px;
 }

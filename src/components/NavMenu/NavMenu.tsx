@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./NavMenu.module.css";
+import { getLocalUser } from "@hooks/libs/localStorage";
 
 export function NavMenu() {
     return (
@@ -11,15 +12,15 @@ export function NavMenu() {
                     </Link>
                 </li>
                 <li className={styles.menuItem}>
-                    <Link href="/MyTracksPage" className={styles.menuLink}>
+                    <Link href="/tracks/myPlaylist" className={styles.menuLink}>
                         Мой плейлист
                     </Link>
                 </li>
-                <li className={styles.menuItem}>
+                {getLocalUser ? null : (                    <li className={styles.menuItem}>
                     <Link href="/signin" className={styles.menuLink}>
                         Войти
                     </Link>
-                </li>
+                </li>)}
             </ul>
         </div>
     );

@@ -18,3 +18,9 @@ type userType = {
   last_name: string;
   email: string;
 };
+
+type formUserType = {
+  email: string,
+  password: string,
+  username?: string;
+};
